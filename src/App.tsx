@@ -6,6 +6,7 @@ import { UpgradeShop } from "./components/shop/UpgradeShop";
 import { useGameLoop } from "./hooks/useGameLoop";
 import { formatNumber } from "./game/utils/formatNumber";
 import { ResourceBar } from "./components/resources/ResourceBar";
+import { ClickActions } from "./components/actions/ClickActions";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -18,20 +19,11 @@ function App() {
 
       <ResourceBar state={state} />
 
-      <section>
-        <h2>Actions</h2>
-
-        <button onClick={() => dispatch({ type: "WRITE_CODE" })}>
-          Write Code
-        </button>
-
-        <button
-          onClick={() => dispatch({ type: "FIX_BUG" })}
-          disabled={state.bugs <= 0}
-        >
-          Fix Bug
-        </button>
-      </section>
+      <ClickActions
+        bugs={state.bugs}
+        onWriteCode={() => dispatch({ type: "WRITE_CODE" })}
+        onFixBug={() => dispatch({ type: "FIX_BUG" })}
+      />
 
       <UpgradeShop
         state={state}
