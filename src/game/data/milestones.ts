@@ -28,6 +28,12 @@ export const milestones: Milestone[] = [
     requiredTotalLoc: 10_000,
   },
   {
+    id: "scaleUp",
+    name: "Scale Up",
+    description: "You wrote 100,000 total LOC.",
+    requiredTotalLoc: 100_000,
+  },
+  {
     id: "projectStudio",
     name: "Project Studio",
     description: "You shipped 3 projects.",
