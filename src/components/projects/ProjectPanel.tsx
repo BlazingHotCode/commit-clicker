@@ -3,6 +3,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Grid,
   Paper,
   Typography,
 } from "@mui/material";
@@ -22,7 +23,7 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
         Projects
       </Typography>
 
-      <div className="project-grid">
+      <Grid container spacing={1.5}>
         {projects.map((project) => {
           const completed = state.completedProjects.includes(project.id);
           const unlocked =
@@ -35,67 +36,72 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
             state.reputation >= project.reputationCost;
 
           return (
-            <Card
-              key={project.id}
-              variant="outlined"
-              className={
-                completed
-                  ? "completed-card"
-                  : !unlocked
-                    ? "locked-card"
-                    : undefined
-              }
-            >
-              <CardContent>
-                <Typography variant="h6" component="h3">
-                  {completed ? "Shipped: " : ""}
-                  {project.name}
-                </Typography>
-
-                {!unlocked && (
-                  <Typography color="error" sx={{ mt: 1 }}>
-                    <strong>Locked:</strong> Ship the previous project first.
+            <Grid key={project.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <Card
+                variant="outlined"
+                className={
+                  completed
+                    ? "completed-card"
+                    : !unlocked
+                      ? "locked-card"
+                      : undefined
+                }
+              >
+                <CardContent>
+                  <Typography variant="h6" component="h3">
+                    {completed ? "Shipped: " : ""}
+                    {project.name}
                   </Typography>
-                )}
 
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
-                  {project.description}
-                </Typography>
+                  {!unlocked && (
+                    <Typography color="error" sx={{ mt: 1 }}>
+                      <strong>Locked:</strong> Ship the previous project first.
+                    </Typography>
+                  )}
 
-                <Typography sx={{ mt: 1 }}>
-                  <strong>Cost:</strong> {formatNumber(project.locCost)} LOC,{" "}
-                  {formatNumber(project.reputationCost)} reputation
-                </Typography>
+                  <Typography color="text.secondary" sx={{ mt: 1 }}>
+                    {project.description}
+                  </Typography>
 
-                <Typography>
-                  <strong>Your progress:</strong>{" "}
-                  {formatNumber(Math.min(state.linesOfCode, project.locCost))} /{" "}
-                  {formatNumber(project.locCost)} LOC,{" "}
-                  {formatNumber(
-                    Math.min(state.reputation, project.reputationCost),
-                  )}{" "}
-                  / {formatNumber(project.reputationCost)} reputation
-                </Typography>
+                  <Typography sx={{ mt: 1 }}>
+                    <strong>Cost:</strong> {formatNumber(project.locCost)} LOC,{" "}
+                    {formatNumber(project.reputationCost)} reputation
+                  </Typography>
 
-                <Typography>
-                  <strong>Reward:</strong> {project.rewardLabel}
-                </Typography>
-              </CardContent>
+                  <Typography>
+                    <strong>Your progress:</strong>{" "}
+                    {formatNumber(Math.min(state.linesOfCode, project.locCost))}{" "}
+                    / {formatNumber(project.locCost)} LOC,{" "}
+                    {formatNumber(
+                      Math.min(state.reputation, project.reputationCost),
+                    )}{" "}
+                    / {formatNumber(project.reputationCost)} reputation
+                  </Typography>
 
-              <CardActions>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  disabled={completed || !canAfford}
-                  onClick={() => onShipProject(project.id)}
-                >
-                  {completed ? "Shipped" : unlocked ? "Ship Project" : "Locked"}
-                </Button>
-              </CardActions>
-            </Card>
+                  <Typography>
+                    <strong>Reward:</strong> {project.rewardLabel}
+                  </Typography>
+                </CardContent>
+
+                <CardActions>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    disabled={completed || !canAfford}
+                    onClick={() => onShipProject(project.id)}
+                  >
+                    {completed
+                      ? "Shipped"
+                      : unlocked
+                        ? "Ship Project"
+                        : "Locked"}
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
           );
         })}
-      </div>
+      </Grid>
     </Paper>
   );
 }
