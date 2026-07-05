@@ -129,3 +129,22 @@ article button {
   border-color: #22c55e;
   background: #10251a;
 }
+
+.status-badge {
+  display: inline-block;
+  margin-right: 0.5rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.status-complete {
+  background: #14532d;
+  color: #86efac;
+}
+
+.status-locked {
+  background: #3f1d1d;
+  color: #fca5a5;
+}

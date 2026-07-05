@@ -23,7 +23,15 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
           return (
             <article key={milestone.id}>
               <h3>
-                {unlocked ? "V " : "X "}
+                <span
+                  className={
+                    unlocked
+                      ? "status-badge status-complete"
+                      : "status-badge status-locked"
+                  }
+                >
+                  {unlocked ? "✓ Unlocked" : "✕ Locked"}
+                </span>
                 {milestone.name}
               </h3>
 
