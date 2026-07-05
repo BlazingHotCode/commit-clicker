@@ -3,7 +3,8 @@ export type UpgradeId =
   | "autocomplete"
   | "juniorDev"
   | "unitTests"
-  | "debugger";
+  | "debugger"
+  | "seniorDev";
 
 export type GameState = {
   linesOfCode: number;

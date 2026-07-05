@@ -75,4 +75,17 @@ export const upgrades: Upgrade[] = [
       reputationPerBug: state.reputationPerBug + 1,
     }),
   },
+  {
+    id: "seniorDev",
+    name: "Senior Dev",
+    description: "+10 LOC per second",
+    effectLabel: "+10 LOC / second",
+    baseCost: 5_000,
+    costMultiplier: 1.7,
+    requiredProjectIds: ["openSourceLibrary"],
+    apply: (state) => ({
+      ...state,
+      locPerSecond: state.locPerSecond + 10,
+    }),
+  },
 ];

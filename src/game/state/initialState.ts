@@ -21,6 +21,7 @@ export const initialState: GameState = {
     juniorDev: 0,
     unitTests: 0,
     debugger: 0,
+    seniorDev: 0,
   },
 
   unlockedMilestones: [],
