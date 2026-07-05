@@ -50,6 +50,8 @@ export function ResourceBar({ state }: ResourceBarProps) {
           label="Bugs fixed"
           value={formatNumber(state.totalBugsFixed)}
         />
+
+        <ResourceItem label="Autosave" value="Every 3 seconds" />
       </div>
     </section>
   );
