@@ -62,6 +62,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       if (!project) return state;
       if (state.completedProjects.includes(project.id)) return state;
+
+      const unlocked =
+        project.requiredProjectIds?.every((projectId) =>
+          state.completedProjects.includes(projectId),
+        ) ?? true;
+
+      if (!unlocked) return state;
       if (state.linesOfCode < project.locCost) return state;
       if (state.reputation < project.reputationCost) return state;
 
