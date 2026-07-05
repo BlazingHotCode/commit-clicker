@@ -18,13 +18,19 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
   });
 
   if (!nextProject) {
-    return (
-      <section>
-        <h2>Next Goal</h2>
-        <p>All current projects shipped. More content coming soon.</p>
-      </section>
-    );
-  }
+  return (
+    <section>
+      <h2>Next Goal</h2>
+      <article>
+        <h3>Prepare for Open Source Fame</h3>
+        <p>
+          You shipped every current project. The next major system should be
+          prestige: reset your project for permanent reputation bonuses.
+        </p>
+      </article>
+    </section>
+  );
+}
 
   const locRemaining = Math.max(0, nextProject.locCost - state.linesOfCode);
   const reputationRemaining = Math.max(
