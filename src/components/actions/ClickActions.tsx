@@ -13,11 +13,13 @@ export function ClickActions({
     <section>
       <h2>Actions</h2>
 
-      <button onClick={onWriteCode}>Write Code</button>
+      <div className="actions">
+        <button onClick={onWriteCode}>Write Code</button>
 
-      <button onClick={onFixBug} disabled={bugs <= 0}>
-        Fix Bug
-      </button>
+        <button onClick={onFixBug} disabled={bugs <= 0}>
+          Fix Bug
+        </button>
+      </div>
     </section>
   );
 }

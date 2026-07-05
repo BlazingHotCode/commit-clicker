@@ -10,26 +10,26 @@ export function ResourceBar({ state }: ResourceBarProps) {
   return (
     <section>
       <h2>Resources</h2>
-      <ResourceItem
-        label={"Lines of Code"}
-        value={formatNumber(state.linesOfCode)}
+
+      <div className="resource-grid">
+        <ResourceItem
+          label={"Lines of Code"}
+          value={formatNumber(state.linesOfCode)}
         />
-      <ResourceItem
-        label="Bugs"
-        value={state.bugs}
-      />
-      <ResourceItem
-        label="Reputation"
-        value={formatNumber(state.reputation)}
-      />
-      <ResourceItem
-        label="LOC per click"
-        value={formatNumber(state.locPerClick)}
-      />
-      <ResourceItem
-        label="LOC per second"
-        value={formatNumber(state.locPerSecond)}
-      />
+        <ResourceItem label="Bugs" value={state.bugs} />
+        <ResourceItem
+          label="Reputation"
+          value={formatNumber(state.reputation)}
+        />
+        <ResourceItem
+          label="LOC per click"
+          value={formatNumber(state.locPerClick)}
+        />
+        <ResourceItem
+          label="LOC per second"
+          value={formatNumber(state.locPerSecond)}
+        />
+      </div>
     </section>
   );
 }
