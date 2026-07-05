@@ -17,7 +17,9 @@ type ProjectPanelProps = {
 export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
   return (
     <section>
-      <h2>Projects</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Projects
+      </Typography>
 
       <div className="project-grid">
         {projects.map((project) => {
