@@ -22,6 +22,8 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
               state.completedProjects.includes(projectId),
             ) ?? true;
 
+          if (!unlocked) return null
+
           return (
             <UpgradeCard
               key={upgrade.id}
@@ -29,7 +31,7 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
               level={level}
               cost={cost}
               canAfford={state.linesOfCode >= cost}
-              locked={!unlocked}
+              locked={false}
               onBuy={onBuyUpgrade}
             />
           );
