@@ -5,7 +5,7 @@ export const initialState: GameState = {
   bugs: 0,
   reputation: 0,
 
-  totalLinesofCode: 0,
+  totalLinesOfCode: 0,
   totalBugsFixed: 0,
 
   locPerClick: 1,
