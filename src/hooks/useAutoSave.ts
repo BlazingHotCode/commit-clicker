@@ -12,7 +12,6 @@ export function useAutoSave(state: GameState) {
   useEffect(() => {
     const interval = window.setInterval(() => {
       saveGame(stateRef.current);
-      console.log("Game saved", stateRef.current);
     }, 3000);
 
     return () => window.clearInterval(interval);
