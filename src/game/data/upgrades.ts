@@ -6,6 +6,7 @@ export type Upgrade = {
   description: string;
   baseCost: number;
   costMultiplier: number;
+  effectLabel: string;
 };
 
 export const upgrades: Upgrade[] = [
@@ -15,6 +16,7 @@ export const upgrades: Upgrade[] = [
     description: "+1 LOC per click",
     baseCost: 10,
     costMultiplier: 1.35,
+    effectLabel: "+1 LOC / click",
   },
   {
     id: "autocomplete",
@@ -22,6 +24,7 @@ export const upgrades: Upgrade[] = [
     description: "+5 LOC per click",
     baseCost: 75,
     costMultiplier: 1.45,
+    effectLabel: "+5 LOC / click",
   },
   {
     id: "juniorDev",
@@ -29,6 +32,7 @@ export const upgrades: Upgrade[] = [
     description: "+1 LOC per second",
     baseCost: 100,
     costMultiplier: 1.5,
+    effectLabel: "+1 LOC / second",
   },
   {
     id: "unitTests",
@@ -36,6 +40,7 @@ export const upgrades: Upgrade[] = [
     description: "Reduces bug chance",
     baseCost: 150,
     costMultiplier: 1.6,
+    effectLabel: "-1% bug chance",
   },
   {
     id: "debugger",
@@ -43,5 +48,6 @@ export const upgrades: Upgrade[] = [
     description: "+1 reputation per fixed bug",
     baseCost: 200,
     costMultiplier: 1.55,
+    effectLabel: "+1 reputation / bug",
   },
 ];

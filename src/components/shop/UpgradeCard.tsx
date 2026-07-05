@@ -21,8 +21,9 @@ export function UpgradeCard({
     <article>
       <h3>{upgrade.name}</h3>
       <p>{upgrade.description}</p>
-      <p>Level: {level}</p>
-      <p>Cost: {formatNumber(cost)} LOC</p>
+      <p><strong>Effect:</strong> {upgrade.effectLabel}</p>
+      <p><strong>Level:</strong> {level}</p>
+      <p><strong>Cost:</strong> {formatNumber(cost)} LOC</p>
 
       <button disabled={!canAfford} onClick={() => onBuy(upgrade.id)}>
         Buy
