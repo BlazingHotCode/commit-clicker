@@ -1,3 +1,10 @@
+import {
+  Alert,
+  Card,
+  CardContent,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import { projects } from "../../game/data/projects";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -18,19 +25,17 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
   });
 
   if (!nextProject) {
-  return (
-    <section>
-      <h2>Next Goal</h2>
-      <article>
-        <h3>Prepare for Open Source Fame</h3>
-        <p>
+    return (
+      <section>
+        <h2>Next Goal</h2>
+
+        <Alert severity="info" variant="outlined">
           You shipped every current project. The next major system should be
           prestige: reset your project for permanent reputation bonuses.
-        </p>
-      </article>
-    </section>
-  );
-}
+        </Alert>
+      </section>
+    );
+  }
 
   const locRemaining = Math.max(0, nextProject.locCost - state.linesOfCode);
   const reputationRemaining = Math.max(
@@ -38,24 +43,56 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
     nextProject.reputationCost - state.reputation,
   );
 
+  const locProgress = Math.min(state.linesOfCode / nextProject.locCost, 1);
+  const reputationProgress = Math.min(
+    state.reputation / nextProject.reputationCost,
+    1,
+  );
+
   return (
     <section>
       <h2>Next Goal</h2>
 
-      <article>
-        <h3>Ship {nextProject.name}</h3>
+      <Card variant="outlined">
+        <CardContent>
+          <Typography variant="h6" component="h3">
+            Ship {nextProject.name}
+          </Typography>
 
-        <p>{nextProject.description}</p>
+          <Typography color="text.secondary" sx={{ mt: 1 }}>
+            {nextProject.description}
+          </Typography>
 
-        <p>
-          Need {formatNumber(locRemaining)} more LOC and{" "}
-          {formatNumber(reputationRemaining)} more reputation.
-        </p>
+          <Typography sx={{ mt: 2 }}>
+            LOC progress: {formatNumber(state.linesOfCode)} /{" "}
+            {formatNumber(nextProject.locCost)}
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={locProgress * 100}
+            sx={{ mt: 0.75 }}
+          />
 
-        <p>
-          <strong>Reward:</strong> {nextProject.rewardLabel}
-        </p>
-      </article>
+          <Typography sx={{ mt: 2 }}>
+            Reputation progress: {formatNumber(state.reputation)} /{" "}
+            {formatNumber(nextProject.reputationCost)}
+          </Typography>
+          <LinearProgress
+            variant="determinate"
+            value={reputationProgress * 100}
+            sx={{ mt: 0.75 }}
+          />
+
+          <Typography sx={{ mt: 2 }}>
+            Need {formatNumber(locRemaining)} more LOC and{" "}
+            {formatNumber(reputationRemaining)} more reputation.
+          </Typography>
+
+          <Typography sx={{ mt: 1 }}>
+            <strong>Reward:</strong> {nextProject.rewardLabel}
+          </Typography>
+        </CardContent>
+      </Card>
     </section>
   );
 }
