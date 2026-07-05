@@ -1,3 +1,10 @@
+import {
+  Card,
+  CardContent,
+  Chip,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import { milestones } from "../../game/data/milestones";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -22,42 +29,43 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
           const unlocked = progress >= 1;
 
           return (
-            <article
+            <Card
               key={milestone.id}
+              variant="outlined"
               className={unlocked ? "completed-card" : "locked-card"}
             >
-              <h3>
-                <span
-                  className={
-                    unlocked
-                      ? "status-badge status-complete"
-                      : "status-badge status-locked"
-                  }
-                >
-                  {unlocked ? "✓ Unlocked" : "✕ Locked"}
-                </span>
-                {milestone.name}
-              </h3>
+              <CardContent>
+                <Typography variant="h6" component="h3">
+                  <Chip
+                    size="small"
+                    color={unlocked ? "success" : "error"}
+                    label={unlocked ? "Unlocked" : "Locked"}
+                    sx={{ mr: 1 }}
+                  />
+                  {milestone.name}
+                </Typography>
 
-              <p>{milestone.description}</p>
+                <Typography color="text.secondary" sx={{ mt: 1 }}>
+                  {milestone.description}
+                </Typography>
 
-              <div className="progress-bar">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${progress * 100}%` }}
+                <LinearProgress
+                  variant="determinate"
+                  value={progress * 100}
+                  sx={{ mt: 2 }}
                 />
-              </div>
 
-              <p>
-                {milestone.requiredTotalLoc
-                  ? `${formatNumber(state.totalLinesOfCode)} / ${formatNumber(
-                      milestone.requiredTotalLoc,
-                    )} total LOC`
-                  : unlocked
-                    ? "Complete"
-                    : "Incomplete"}
-              </p>
-            </article>
+                <Typography sx={{ mt: 1 }}>
+                  {milestone.requiredTotalLoc
+                    ? `${formatNumber(state.totalLinesOfCode)} / ${formatNumber(
+                        milestone.requiredTotalLoc,
+                      )} total LOC`
+                    : unlocked
+                      ? "Complete"
+                      : "Incomplete"}
+                </Typography>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
