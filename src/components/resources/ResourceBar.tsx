@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { getEffectiveStats } from "../../game/engine/stats";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -16,59 +16,83 @@ export function ResourceBar({ state }: ResourceBarProps) {
         Resources
       </Typography>
 
-      <div className="resource-grid">
-        <ResourceItem
-          label={"Lines of Code"}
-          value={formatNumber(state.linesOfCode)}
-        />
-        <ResourceItem label="Bugs" value={state.bugs} />
-        <ResourceItem
-          label="Reputation"
-          value={formatNumber(state.reputation)}
-        />
+      <Grid container spacing={1.5}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label={"Lines of Code"}
+            value={formatNumber(state.linesOfCode)}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem label="Bugs" value={state.bugs} />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="Reputation"
+            value={formatNumber(state.reputation)}
+          />
+        </Grid>
         {(state.prestigePoints > 0 || state.totalLinesOfCode >= 100_000) && (
           <>
-            <ResourceItem
-              label="Prestige Points"
-              value={formatNumber(state.prestigePoints)}
-            />
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ResourceItem
+                label="Prestige Points"
+                value={formatNumber(state.prestigePoints)}
+              />
+            </Grid>
 
-            <ResourceItem
-              label="Prestige bonus"
-              value={`+${formatNumber(state.prestigePoints * 5)}% LOC`}
-            />
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+              <ResourceItem
+                label="Prestige bonus"
+                value={`+${formatNumber(state.prestigePoints * 5)}% LOC`}
+              />
+            </Grid>
           </>
         )}
-        <ResourceItem
-          label="LOC per click"
-          value={formatNumber(stats.locPerClick)}
-        />
-        <ResourceItem
-          label="LOC per second"
-          value={formatNumber(stats.locPerSecond)}
-        />
-        <ResourceItem
-          label="Bug chance"
-          value={`${Math.round(stats.bugChance * 100)}%`}
-        />
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="LOC per click"
+            value={formatNumber(stats.locPerClick)}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="LOC per second"
+            value={formatNumber(stats.locPerSecond)}
+          />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="Bug chance"
+            value={`${Math.round(stats.bugChance * 100)}%`}
+          />
+        </Grid>
 
-        <ResourceItem
-          label="Reputation per bug"
-          value={formatNumber(stats.reputationPerBug)}
-        />
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="Reputation per bug"
+            value={formatNumber(stats.reputationPerBug)}
+          />
+        </Grid>
 
-        <ResourceItem
-          label="Total LOC"
-          value={formatNumber(state.totalLinesOfCode)}
-        />
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="Total LOC"
+            value={formatNumber(state.totalLinesOfCode)}
+          />
+        </Grid>
 
-        <ResourceItem
-          label="Bugs fixed"
-          value={formatNumber(state.totalBugsFixed)}
-        />
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem
+            label="Bugs fixed"
+            value={formatNumber(state.totalBugsFixed)}
+          />
+        </Grid>
 
-        <ResourceItem label="Autosave" value="Every 3 seconds" />
-      </div>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <ResourceItem label="Autosave" value="Every 3 seconds" />
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
