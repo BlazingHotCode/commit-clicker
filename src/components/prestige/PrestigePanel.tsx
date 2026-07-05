@@ -1,9 +1,15 @@
+import { useState } from "react";
 import {
   Alert,
   Button,
   Card,
   CardActions,
   CardContent,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Typography,
 } from "@mui/material";
 import type { GameState } from "../../game/state/types";
@@ -15,6 +21,8 @@ type PrestigePanelProps = {
 };
 
 export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+
   const earnedPrestigePoints = state.totalLinesOfCode / 100_000;
   const canPrestige = earnedPrestigePoints >= 1;
   const currentBonus = state.prestigePoints * 5;
@@ -38,8 +46,9 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
           </Typography>
 
           <Typography color="text.secondary" sx={{ mt: 1 }}>
-            You will gain <strong>{formatNumber(earnedPrestigePoints)}</strong>{" "}
-            prestige points.
+            You will gain{" "}
+            <strong>{formatNumber(earnedPrestigePoints)}</strong> prestige
+            points.
           </Typography>
 
           <Typography sx={{ mt: 1 }}>
@@ -54,20 +63,43 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
             variant="contained"
             color="warning"
             disabled={!canPrestige}
-            onClick={() => {
-              const confirmed = window.confirm(
-                "Prestige will reset your current run, upgrades, projects, bugs, and reputation. Prestige points will stay. Continue?",
-              );
-
-              if (confirmed) {
-                onPrestige();
-              }
-            }}
+            onClick={() => setConfirmOpen(true)}
           >
             {canPrestige ? "Prestige Now" : "Reach 100,000 total LOC"}
           </Button>
         </CardActions>
       </Card>
+
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <DialogTitle>Prestige now?</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Prestige will reset your current run, upgrades, projects, bugs, and
+            reputation. You will keep your prestige points and permanent LOC
+            bonus.
+          </DialogContentText>
+
+          <DialogContentText sx={{ mt: 2 }}>
+            You will gain {formatNumber(earnedPrestigePoints)} prestige points.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={() => setConfirmOpen(false)}>Cancel</Button>
+
+          <Button
+            color="warning"
+            variant="contained"
+            onClick={() => {
+              setConfirmOpen(false);
+              onPrestige();
+            }}
+          >
+            Prestige
+          </Button>
+        </DialogActions>
+      </Dialog>
     </section>
   );
 }
