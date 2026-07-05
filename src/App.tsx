@@ -24,8 +24,10 @@ function App() {
 
       <ClickActions
         bugs={state.bugs}
+        reputation={state.reputation}
         onWriteCode={() => dispatch({ type: "WRITE_CODE" })}
         onFixBug={() => dispatch({ type: "FIX_BUG" })}
+        onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
       />
 
       <UpgradeShop

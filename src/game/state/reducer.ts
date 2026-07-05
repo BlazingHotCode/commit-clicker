@@ -34,6 +34,20 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case "REFACTOR_CODE": {
+      const reputationCost = 5;
+      const bugsRemoved = 3;
+
+      if (state.reputation < reputationCost) return state;
+      if (state.bugs <= 0) return state;
+
+      return {
+        ...state,
+        reputation: state.reputation - reputationCost,
+        bugs: Math.max(0, state.bugs - bugsRemoved),
+      };
+    }
+
     case "BUY_UPGRADE": {
       const upgrade = upgrades.find((item) => item.id === action.upgradeId);
       if (!upgrade) return state;
