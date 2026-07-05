@@ -48,40 +48,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         },
       };
 
-      switch (action.upgradeId) {
-        case "mechanicalKeyboard":
-          return {
-            ...nextState,
-            locPerClick: nextState.locPerClick + 1,
-          };
-
-        case "autocomplete":
-          return {
-            ...nextState,
-            locPerClick: nextState.locPerClick + 5,
-          };
-
-        case "juniorDev":
-          return {
-            ...nextState,
-            locPerSecond: nextState.locPerSecond + 1,
-          };
-
-        case "unitTests":
-          return {
-            ...nextState,
-            bugChance: Math.max(0.01, nextState.bugChance - 0.01),
-          };
-
-        case "debugger":
-          return {
-            ...nextState,
-            reputationPerBug: nextState.reputationPerBug + 1,
-          };
-
-        default:
-          return nextState;
-      }
+      return upgrade.apply(nextState);
     }
 
     case "TICK": {
