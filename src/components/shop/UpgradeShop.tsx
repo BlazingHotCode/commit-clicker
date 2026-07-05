@@ -16,7 +16,9 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
         Upgrade Shop
       </Typography>
 
-      <p className="section-help">Ship projects to unlock more upgrades.</p>
+      <Typography color="text.secondary" sx={{ mb: 2 }}>
+        Ship projects to unlock more upgrades.
+      </Typography>
 
       <div className="upgrade-grid">
         {upgrades.map((upgrade) => {
