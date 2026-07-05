@@ -1,3 +1,4 @@
+import { projects } from "../data/projects";
 import { upgrades } from "../data/upgrades";
 import { getUpgradeCost } from "../engine/formulas";
 import { getEffectiveStats } from "../engine/stats";
@@ -52,6 +53,26 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
 
       return upgrade.apply(nextState);
+    }
+
+    case "SHIP_PROJECT": {
+      const project = projects.find(
+        (project) => project.id === action.projectId,
+      );
+
+      if (!project) return state;
+      if (state.completedProjects.includes(project.id)) return state;
+      if (state.linesOfCode < project.locCost) return state;
+      if (state.reputation < project.reputationCost) return state;
+
+      const nextState: GameState = {
+        ...state,
+        linesOfCode: state.linesOfCode - project.locCost,
+        reputation: state.reputation - project.reputationCost,
+        completedProjects: [...state.completedProjects, project.id],
+      };
+
+      return project.applyReward(nextState);
     }
 
     case "TICK": {
