@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { getEffectiveStats } from "../../game/engine/stats";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -11,7 +12,9 @@ export function ResourceBar({ state }: ResourceBarProps) {
   const stats = getEffectiveStats(state);
   return (
     <section>
-      <h2>Resources</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Resources
+      </Typography>
 
       <div className="resource-grid">
         <ResourceItem
