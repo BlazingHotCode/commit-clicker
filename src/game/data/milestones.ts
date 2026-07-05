@@ -45,4 +45,10 @@ export const milestones: Milestone[] = [
     description: "You shipped 5 projects.",
     isUnlocked: (state) => state.completedProjects.length >= 5,
   },
+  {
+    id: "prestigeReady",
+    name: "Ready For Fame",
+    description: "Earn your first prestige point.",
+    isUnlocked: (state) => state.prestigePoints >= 1,
+  },
 ];
