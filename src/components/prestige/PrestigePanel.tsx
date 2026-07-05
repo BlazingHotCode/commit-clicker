@@ -36,7 +36,18 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
           <strong>+{formatNumber(nextBonus)}%</strong>
         </p>
 
-        <button disabled={!canPrestige} onClick={onPrestige}>
+        <button
+          disabled={!canPrestige}
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Prestige will reset your current run, upgrades, projects, bugs, and reputation. Prestige points will stay. Continue?",
+            );
+
+            if (confirmed) {
+              onPrestige();
+            }
+          }}
+        >
           {canPrestige ? "Prestige Now" : "Reach 100,000 total LOC"}
         </button>
       </article>
