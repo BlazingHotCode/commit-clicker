@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
@@ -15,11 +15,27 @@ import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 import { DebugPanel } from "./components/debug/DebugPanel";
 import { PrestigePanel } from "./components/prestige/PrestigePanel";
 import { formatNumber } from "./game/utils/formatNumber";
+import { Alert } from "@mui/material";
 
 const DEBUG_TOOLS_ENABLED = false;
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
+  const [showOfflineAlert, setShowOfflineAlert] = useState(
+    state.offlineLocGained > 0,
+  );
+
+  useEffect(() => {
+    if (state.offlineLocGained <= 0) return;
+
+    setShowOfflineAlert(true);
+
+    const timeout = window.setTimeout(() => {
+      setShowOfflineAlert(false);
+    }, 60_000);
+
+    return () => window.clearTimeout(timeout);
+  }, [state.offlineLocGained]);
 
   useGameLoop(dispatch);
   useAutoSave(state);
@@ -28,14 +44,15 @@ function App() {
     <GameLayout>
       <ResourceBar state={state} />
 
-      {state.offlineLocGained > 0 && (
-        <section>
-          <h2>Welcome Back</h2>
-          <p>
-            You gained {formatNumber(state.offlineLocGained)} LOC while you were
-            away.
-          </p>
-        </section>
+      {showOfflineAlert && state.offlineLocGained > 0 && (
+        <Alert
+          severity="success"
+          sx={{ mb: 2 }}
+          onClose={() => setShowOfflineAlert(false)}
+        >
+          Welcome back! You gained {formatNumber(state.offlineLocGained)} LOC
+          while you were away.
+        </Alert>
       )}
 
       <ClickActions
