@@ -58,6 +58,16 @@ export const achievements: Achievement[] = [
     },
   },
   {
+    id: "hundredLocPerSecond",
+    name: "Automation Engine",
+    description: "Reach 100 LOC per second.",
+    bonusLabel: "+20 LOC / second",
+    isUnlocked: (state) => state.locPerSecond >= 100,
+    modifiers: {
+      locPerSecond: 20,
+    },
+  },
+  {
     id: "firstProject",
     name: "Shipped It",
     description: "Ship your first project.",
