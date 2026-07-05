@@ -24,10 +24,10 @@ const theme = createTheme({
 });
 
 createRoot(document.getElementById("root")!).render(
-  <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <StrictMode>
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <App />
-    </StrictMode>
-  </ThemeProvider>,
+    </ThemeProvider>
+  </StrictMode>,
 );
