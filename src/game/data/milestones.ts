@@ -39,4 +39,10 @@ export const milestones: Milestone[] = [
     description: "You shipped 3 projects.",
     isUnlocked: (state) => state.completedProjects.length >= 3,
   },
+  {
+    id: "shippingDepartment",
+    name: "Shipping Department",
+    description: "You shipped 5 projects.",
+    isUnlocked: (state) => state.completedProjects.length >= 5,
+  },
 ];
