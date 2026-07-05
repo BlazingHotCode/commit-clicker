@@ -16,7 +16,9 @@ type MilestonePanelProps = {
 export function MilestonePanel({ state }: MilestonePanelProps) {
   return (
     <section>
-      <h2>Milestones</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Milestones
+      </Typography>
 
       <div className="milestone-grid">
         {milestones.map((milestone) => {
