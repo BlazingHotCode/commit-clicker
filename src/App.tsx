@@ -62,20 +62,24 @@ function App() {
         onPrestige={() => dispatch({ type: "PRESTIGE" })}
       />
 
-      <button
-        onClick={() => {
-          const confirmed = window.confirm(
-            "Resetting your save will permanently delete all progress, including prestige points. Continue?",
-          );
+      <section>
+        <h2>Settings</h2>
 
-          if (!confirmed) return;
+        <button
+          onClick={() => {
+            const confirmed = window.confirm(
+              "Resetting your save will permanently delete all progress, including prestige points. Continue?",
+            );
 
-          clearSave();
-          dispatch({ type: "RESET_GAME" });
-        }}
-      >
-        Reset Save
-      </button>
+            if (!confirmed) return;
+
+            clearSave();
+            dispatch({ type: "RESET_GAME" });
+          }}
+        >
+          Reset Save
+        </button>
+      </section>
     </GameLayout>
   );
 }
