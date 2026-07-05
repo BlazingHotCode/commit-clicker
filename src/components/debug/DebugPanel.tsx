@@ -31,7 +31,9 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
 
   return (
     <section>
-      <h2>Debug Tools</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Debug Tools
+      </Typography>
 
       <div className="debug-grid">
         <Card variant="outlined">
