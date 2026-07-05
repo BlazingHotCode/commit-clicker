@@ -25,13 +25,19 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
             state.reputation >= project.reputationCost;
 
           return (
-            <article key={project.id}>
+            <article key={project.id} className={!unlocked ? "locked-card" : undefined}>
               <h3>
                 {completed ? "Shipped: " : ""}
                 {project.name}
               </h3>
 
               <p>{project.description}</p>
+
+              {!unlocked && (
+                <p>
+                  <strong>Locked:</strong> Ship the previous project first.
+                </p>
+              )}
 
               <p>
                 <strong>Cost:</strong> {formatNumber(project.locCost)} LOC,{" "}
