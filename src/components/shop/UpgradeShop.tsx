@@ -2,6 +2,7 @@ import { upgrades } from "../../game/data/upgrades";
 import { getUpgradeCost } from "../../game/engine/formulas";
 import type { GameState, UpgradeId } from "../../game/state/types";
 import { UpgradeCard } from "./UpgradeCard";
+import { Typography } from "@mui/material";
 
 type UpgradeShopProps = {
   state: GameState;
@@ -11,7 +12,9 @@ type UpgradeShopProps = {
 export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
   return (
     <section>
-      <h2>Upgrade Shop</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 1, fontWeight: 700 }}>
+        Upgrade Shop
+      </Typography>
 
       <p className="section-help">Ship projects to unlock more upgrades.</p>
 
