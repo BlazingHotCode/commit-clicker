@@ -13,6 +13,8 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
     <section>
       <h2>Upgrade Shop</h2>
 
+      <p className="section-help">Ship projects to unlock more upgrades.</p>
+
       <div className="upgrade-grid">
         {upgrades.map((upgrade) => {
           const level = state.upgrades[upgrade.id];
@@ -22,7 +24,7 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
               state.completedProjects.includes(projectId),
             ) ?? true;
 
-          if (!unlocked) return null
+          if (!unlocked) return null;
 
           return (
             <UpgradeCard
