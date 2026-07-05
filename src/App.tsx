@@ -51,6 +51,14 @@ function App() {
 
       <AchievementPanel state={state} />
 
+      {state.totalLinesOfCode >= 100_000 && (
+        <button onClick={() => dispatch({ type: "PRESTIGE" })}>
+          Prestige - Reset for {Math.floor(state.totalLinesOfCode / 100_000)}{" "}
+          prestige point
+          {Math.floor(state.totalLinesOfCode / 100_000) === 1 ? "" : "s"}
+        </button>
+      )}
+
       <button
         onClick={() => {
           clearSave();
