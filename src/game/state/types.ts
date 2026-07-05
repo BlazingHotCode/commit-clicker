@@ -21,4 +21,6 @@ export type GameState = {
   lastSavedAt: number;
 
   upgrades: Record<UpgradeId, number>;
+
+  unlockedMilestones: string[];
 };

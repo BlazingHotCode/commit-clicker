@@ -22,4 +22,6 @@ export const initialState: GameState = {
     unitTests: 0,
     debugger: 0,
   },
+
+  unlockedMilestones: [],
 };

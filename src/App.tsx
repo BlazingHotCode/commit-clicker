@@ -7,6 +7,7 @@ import { ResourceBar } from "./components/resources/ResourceBar";
 import { ClickActions } from "./components/actions/ClickActions";
 import { clearSave, loadGame } from "./game/engine/save";
 import { useAutoSave } from "./hooks/useAutoSave";
+import { MilestonePanel } from "./components/milestones/MilestonePanel";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
@@ -32,6 +33,8 @@ function App() {
           dispatch({ type: "BUY_UPGRADE", upgradeId })
         }
       />
+
+      <MilestonePanel state={state} />
 
       <button
         onClick={() => {
