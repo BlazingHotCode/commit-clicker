@@ -1,5 +1,6 @@
 import { milestones } from "../../game/data/milestones";
 import type { GameState } from "../../game/state/types";
+import { formatNumber } from "../../game/utils/formatNumber";
 
 type MilestonePanelProps = {
   state: GameState;
@@ -10,21 +11,39 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
     <section>
       <h2>Milestones</h2>
 
-      {milestones.map((milestone) => {
-        const unlocked = state.totalLinesOfCode >= milestone.requiredTotalLoc;
+      <div className="milestone-grid">
+        {milestones.map((milestone) => {
+          const progress = Math.min(
+            state.totalLinesOfCode / milestone.requiredTotalLoc,
+            1,
+          );
 
-        return (
-          <article key={milestone.id}>
-            <h3>
-              {unlocked ? "V " : "X "}
-              {milestone.name}
-            </h3>
+          const unlocked = progress >= 1;
 
-            <p>{milestone.description}</p>
-            <p>Required: {milestone.requiredTotalLoc} total LOC</p>
-          </article>
-        );
-      })}
+          return (
+            <article key={milestone.id}>
+              <h3>
+                {unlocked ? "V " : "X "}
+                {milestone.name}
+              </h3>
+
+              <p>{milestone.description}</p>
+
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{ width: `${progress * 100}%` }}
+                />
+              </div>
+
+              <p>
+                {formatNumber(state.totalLinesOfCode)} /{" "}
+                {formatNumber(milestone.requiredTotalLoc)} total LOC
+              </p>
+            </article>
+          );
+        })}
+      </div>
     </section>
   );
 }
