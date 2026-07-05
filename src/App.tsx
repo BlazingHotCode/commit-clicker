@@ -4,14 +4,16 @@ import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
 import { useGameLoop } from "./hooks/useGameLoop";
-import { formatNumber } from "./game/utils/formatNumber";
 import { ResourceBar } from "./components/resources/ResourceBar";
 import { ClickActions } from "./components/actions/ClickActions";
+import { clearSave, loadGame } from "./game/engine/save";
+import { useAutoSave } from "./hooks/useAutoSave";
 
 function App() {
-  const [state, dispatch] = useReducer(gameReducer, initialState);
+  const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
 
   useGameLoop(dispatch);
+  useAutoSave(state)
 
   return (
     <main>
@@ -31,6 +33,15 @@ function App() {
           dispatch({ type: "BUY_UPGRADE", upgradeId })
         }
       />
+
+      <button
+        onClick={() => {
+          clearSave();
+          dispatch({ type: "RESET_GAME"})
+        }}
+      >
+        Reset Save
+      </button>
     </main>
   );
 }
