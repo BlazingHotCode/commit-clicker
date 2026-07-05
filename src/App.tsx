@@ -12,6 +12,9 @@ import { GameLayout } from "./components/layout/GameLayout";
 import { AchievementPanel } from "./components/achievements/AchievementPanel";
 import { ProjectPanel } from "./components/projects/ProjectPanel";
 import { NextGoalPanel } from "./components/goals/NextGoalPanel";
+import { DebugPanel } from "./components/debug/DebugPanel";
+
+const DEBUG_TOOLS_ENABLED = false;
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
@@ -50,6 +53,8 @@ function App() {
       <MilestonePanel state={state} />
 
       <AchievementPanel state={state} />
+
+      {DEBUG_TOOLS_ENABLED && <DebugPanel state={state} />}
 
       {state.totalLinesOfCode >= 100_000 && (
         <button onClick={() => dispatch({ type: "PRESTIGE" })}>
