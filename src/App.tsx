@@ -65,6 +65,10 @@ function App() {
       <section>
         <h2>Settings</h2>
 
+        <p className="section-help">
+          Commit Clicker v0.1 - local autosave enabled.
+        </p>
+
         <button
           onClick={() => {
             const confirmed = window.confirm(
