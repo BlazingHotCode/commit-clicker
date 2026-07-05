@@ -66,4 +66,33 @@ export const projects: Project[] = [
       reputationPerBug: state.reputationPerBug + 3,
     }),
   },
+  {
+    id: "saasDashboard",
+    name: "SaaS Dashboard",
+    description:
+      "Build a polished dashboard with charts, billing, and user management.",
+    locCost: 20_000,
+    reputationCost: 75,
+    requiredProjectIds: ["openSourceLibrary"],
+    rewardLabel: "+15 LOC / second",
+    applyReward: (state) => ({
+      ...state,
+      locPerSecond: state.locPerSecond + 15,
+    }),
+  },
+  {
+    id: "deploymentPlatform",
+    name: "Deployment Platform",
+    description:
+      "Automate deployments so every commit can reach production faster.",
+    locCost: 50_000,
+    reputationCost: 150,
+    requiredProjectIds: ["saasDashboard"],
+    rewardLabel: "+25 LOC / click, +25 LOC / second",
+    applyReward: (state) => ({
+      ...state,
+      locPerClick: state.locPerClick + 25,
+      locPerSecond: state.locPerSecond + 25,
+    }),
+  },
 ];
