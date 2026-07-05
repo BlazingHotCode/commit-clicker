@@ -15,7 +15,15 @@ import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 import { DebugPanel } from "./components/debug/DebugPanel";
 import { PrestigePanel } from "./components/prestige/PrestigePanel";
 import { formatNumber } from "./game/utils/formatNumber";
-import { Alert } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 const DEBUG_TOOLS_ENABLED = false;
 
@@ -24,6 +32,7 @@ function App() {
   const [showOfflineAlert, setShowOfflineAlert] = useState(
     state.offlineLocGained > 0,
   );
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
 
   useEffect(() => {
     if (state.offlineLocGained <= 0) return;
@@ -97,20 +106,43 @@ function App() {
           Commit Clicker v0.1 - local autosave enabled.
         </p>
 
-        <button
-          onClick={() => {
-            const confirmed = window.confirm(
-              "Resetting your save will permanently delete all progress, including prestige points. Continue?",
-            );
-
-            if (!confirmed) return;
-
-            clearSave();
-            dispatch({ type: "RESET_GAME" });
-          }}
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => setResetDialogOpen(true)}
         >
           Reset Save
-        </button>
+        </Button>
+
+        <Dialog
+          open={resetDialogOpen}
+          onClose={() => setResetDialogOpen(false)}
+        >
+          <DialogTitle>Reset save?</DialogTitle>
+
+          <DialogContent>
+            <DialogContentText>
+              Resetting your save will permanently delete all progress,
+              including prestige points. This cannot be undone.
+            </DialogContentText>
+          </DialogContent>
+
+          <DialogActions>
+            <Button onClick={() => setResetDialogOpen(false)}>Cancel</Button>
+
+            <Button
+              color="error"
+              variant="contained"
+              onClick={() => {
+                setResetDialogOpen(false);
+                clearSave();
+                dispatch({ type: "RESET_GAME" });
+              }}
+            >
+              Reset Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </section>
     </GameLayout>
   );
