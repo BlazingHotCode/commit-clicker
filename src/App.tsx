@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import "./App.css";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
+import { UpgradeShop } from "./components/shop/UpgradeShop";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -22,14 +23,24 @@ function App() {
       <section>
         <h2>Actions</h2>
 
-        <button onClick={() => dispatch({type: "WRITE_CODE"})}>
+        <button onClick={() => dispatch({ type: "WRITE_CODE" })}>
           Write Code
         </button>
 
-        <button onClick={() => dispatch({type: "FIX_BUG"})} disabled={state.bugs <= 0}>
+        <button
+          onClick={() => dispatch({ type: "FIX_BUG" })}
+          disabled={state.bugs <= 0}
+        >
           Fix Bug
         </button>
       </section>
+
+      <UpgradeShop
+        state={state}
+        onBuyUpgrade={(upgradeId) =>
+          dispatch({ type: "BUY_UPGRADE", upgradeId })
+        }
+      />
     </main>
   );
 }
