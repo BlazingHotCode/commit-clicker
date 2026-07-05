@@ -1,5 +1,6 @@
 import { upgrades } from "../data/upgrades";
 import { getUpgradeCost } from "../engine/formulas";
+import { applyTick } from "../engine/tick";
 import type { GameAction } from "./actions";
 import { initialState } from "./initialState";
 import type { GameState } from "./types";
@@ -84,13 +85,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "TICK": {
-      const gained = state.locPerSecond * action.deltaSeconds;
-
-      return {
-        ...state,
-        linesOfCode: state.linesOfCode + gained,
-        totalLinesOfCode: state.totalLinesOfCode + gained,
-      };
+      return applyTick(state, action.deltaSeconds);
     }
 
     case "LOAD_GAME":
