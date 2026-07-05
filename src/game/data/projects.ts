@@ -6,6 +6,7 @@ export type Project = {
   description: string;
   locCost: number;
   reputationCost: number;
+  requiredProjectIds?: string[];
   rewardLabel: string;
   applyReward: (state: GameState) => GameState;
 };
@@ -30,6 +31,7 @@ export const projects: Project[] = [
     description: "Build the classic app every developer ships at least once.",
     locCost: 1_000,
     reputationCost: 8,
+    requiredProjectIds: ["personalWebsite"],
     rewardLabel: "+3 LOC / click",
     applyReward: (state) => ({
       ...state,
@@ -42,6 +44,7 @@ export const projects: Project[] = [
     description: "Build a tool to track the bugs you keep creating.",
     locCost: 3_000,
     reputationCost: 15,
+    requiredProjectIds: ["todoApp"],
     rewardLabel: "-2% bug chance, +2 LOC / second",
     applyReward: (state) => ({
       ...state,

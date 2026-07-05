@@ -15,7 +15,12 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
       <div className="project-grid">
         {projects.map((project) => {
           const completed = state.completedProjects.includes(project.id);
+          const unlocked =
+            project.requiredProjectIds?.every((projectId) =>
+              state.completedProjects.includes(projectId),
+            ) ?? true;
           const canAfford =
+            unlocked &&
             state.linesOfCode >= project.locCost &&
             state.reputation >= project.reputationCost;
 
@@ -41,7 +46,7 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
                 disabled={completed || !canAfford}
                 onClick={() => onShipProject(project.id)}
               >
-                {completed ? "Shipped" : "Ship Project"}
+                {completed ? "Shipped" : unlocked ? "Ship Project" : "Locked"}
               </button>
             </article>
           );
