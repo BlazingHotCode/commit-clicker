@@ -52,4 +52,18 @@ export const projects: Project[] = [
       locPerSecond: state.locPerSecond + 2,
     }),
   },
+  {
+    id: "openSourceLibrary",
+    name: "Open Source Library",
+    description:
+      "Release a useful package and watch other developers start trusting your work.",
+    locCost: 8_000,
+    reputationCost: 30,
+    requiredProjectIds: ["bugTracker"],
+    rewardLabel: "+3 reputation / bug",
+    applyReward: (state) => ({
+      ...state,
+      reputationPerBug: state.reputationPerBug + 3,
+    }),
+  },
 ];
