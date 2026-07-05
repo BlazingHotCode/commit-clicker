@@ -24,6 +24,10 @@ export function ResourceBar({ state }: ResourceBarProps) {
           value={formatNumber(state.reputation)}
         />
         <ResourceItem
+          label="Prestige Points"
+          value={formatNumber(state.prestigePoints)}
+        />
+        <ResourceItem
           label="LOC per click"
           value={formatNumber(stats.locPerClick)}
         />

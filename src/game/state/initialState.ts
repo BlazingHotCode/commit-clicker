@@ -5,6 +5,8 @@ export const initialState: GameState = {
   bugs: 0,
   reputation: 0,
 
+  prestigePoints: 0,
+
   totalLinesOfCode: 0,
   totalBugsFixed: 0,
 

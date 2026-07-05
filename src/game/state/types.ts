@@ -13,6 +13,8 @@ export type GameState = {
   bugs: number;
   reputation: number;
 
+  prestigePoints: number;
+
   totalLinesOfCode: number;
   totalBugsFixed: number;
 

@@ -5,6 +5,7 @@ export function createSaveState(saved: Partial<GameState>): GameState {
   return {
     ...initialState,
     ...saved,
+    prestigePoints: saved.prestigePoints ?? 0,
     upgrades: {
       ...initialState.upgrades,
       ...saved.upgrades,
