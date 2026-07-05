@@ -1,3 +1,4 @@
+import { Card, CardContent, Chip, Typography } from "@mui/material";
 import { achievements } from "../../game/data/achievements";
 import type { GameState } from "../../game/state/types";
 
@@ -15,29 +16,31 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
           const unlocked = achievement.isUnlocked(state);
 
           return (
-            <article
+            <Card
               key={achievement.id}
+              variant="outlined"
               className={unlocked ? "completed-card" : "locked-card"}
             >
-              <h3>
-                <span
-                  className={
-                    unlocked
-                      ? "status-badge status-complete"
-                      : "status-badge status-locked"
-                  }
-                >
-                  {unlocked ? "✓ Earned" : "✕ Locked"}
-                </span>
-                {achievement.name}
-              </h3>
+              <CardContent>
+                <Typography variant="h6" component="h3">
+                  <Chip
+                    size="small"
+                    color={unlocked ? "success" : "error"}
+                    label={unlocked ? "Earned" : "Locked"}
+                    sx={{ mr: 1 }}
+                  />
+                  {achievement.name}
+                </Typography>
 
-              <p>{achievement.description}</p>
-              <p>
-                <strong>Bonus: </strong>
-                {achievement.bonusLabel}
-              </p>
-            </article>
+                <Typography color="text.secondary" sx={{ mt: 1 }}>
+                  {achievement.description}
+                </Typography>
+
+                <Typography sx={{ mt: 1 }}>
+                  <strong>Bonus:</strong> {achievement.bonusLabel}
+                </Typography>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
