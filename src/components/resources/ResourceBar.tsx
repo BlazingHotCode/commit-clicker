@@ -8,7 +8,7 @@ type ResourceBarProps = {
 };
 
 export function ResourceBar({ state }: ResourceBarProps) {
-  const stats = getEffectiveStats(state)
+  const stats = getEffectiveStats(state);
   return (
     <section>
       <h2>Resources</h2>

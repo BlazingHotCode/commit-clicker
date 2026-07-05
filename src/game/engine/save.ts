@@ -1,5 +1,6 @@
 import { initialState } from "../state/initialState";
 import type { GameState } from "../state/types";
+import { getEffectiveStats } from "./stats";
 
 const SAVE_KEY = "commit-clicker-save";
 
@@ -31,7 +32,8 @@ export function loadGame(): GameState {
     const now = Date.now();
     const secondsAway = Math.floor((now - parsed.lastSavedAt) / 1000);
     const cappedSecondsAway = Math.min(secondsAway, 60 * 60 * 8);
-    const offlineLoc = parsed.locPerSecond * cappedSecondsAway;
+    const stats = getEffectiveStats(parsed)
+    const offlineLoc = stats.locPerSecond * cappedSecondsAway;
 
     return {
       ...parsed,
