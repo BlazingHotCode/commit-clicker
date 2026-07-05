@@ -13,21 +13,23 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
     <section>
       <h2>Upgrade Shop</h2>
 
-      {upgrades.map((upgrade) => {
-        const level = state.upgrades[upgrade.id];
-        const cost = getUpgradeCost(upgrade, level);
+      <div className="upgrade-grid">
+        {upgrades.map((upgrade) => {
+          const level = state.upgrades[upgrade.id];
+          const cost = getUpgradeCost(upgrade, level);
 
-        return (
-          <UpgradeCard
-            key={upgrade.id}
-            upgrade={upgrade}
-            level={level}
-            cost={cost}
-            canAfford={state.linesOfCode >= cost}
-            onBuy={onBuyUpgrade}
-          />
-        );
-      })}
+          return (
+            <UpgradeCard
+              key={upgrade.id}
+              upgrade={upgrade}
+              level={level}
+              cost={cost}
+              canAfford={state.linesOfCode >= cost}
+              onBuy={onBuyUpgrade}
+            />
+          );
+        })}
+      </div>
     </section>
   );
 }

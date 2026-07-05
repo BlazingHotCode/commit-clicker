@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import "./App.css";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
