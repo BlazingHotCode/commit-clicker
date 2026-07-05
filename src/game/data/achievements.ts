@@ -77,4 +77,14 @@ export const achievements: Achievement[] = [
       locPerClick: 2,
     },
   },
+  {
+    id: "fiveProjects",
+    name: "Product Machine",
+    description: "Ship 5 projects.",
+    bonusLabel: "+10 LOC / second",
+    isUnlocked: (state) => state.completedProjects.length >= 5,
+    modifiers: {
+      locPerSecond: 10,
+    },
+  },
 ];
