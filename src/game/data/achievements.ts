@@ -47,4 +47,14 @@ export const achievements: Achievement[] = [
       bugChance: -0.02,
     },
   },
+  {
+    id: "firstProject",
+    name: "Shipped It",
+    description: "Ship your first project.",
+    bonusLabel: "+1 LOC / second",
+    isUnlocked: (state) => state.completedProjects.length >= 1,
+    modifiers: {
+      locPerSecond: 1,
+    },
+  },
 ];
