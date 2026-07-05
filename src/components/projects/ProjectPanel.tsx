@@ -1,3 +1,10 @@
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import { projects } from "../../game/data/projects";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -25,8 +32,9 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
             state.reputation >= project.reputationCost;
 
           return (
-            <article
+            <Card
               key={project.id}
+              variant="outlined"
               className={
                 completed
                   ? "completed-card"
@@ -35,45 +43,53 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
                     : undefined
               }
             >
-              <h3>
-                {completed ? "Shipped: " : ""}
-                {project.name}
-              </h3>
+              <CardContent>
+                <Typography variant="h6" component="h3">
+                  {completed ? "Shipped: " : ""}
+                  {project.name}
+                </Typography>
 
-              <p>{project.description}</p>
+                {!unlocked && (
+                  <Typography color="error" sx={{ mt: 1 }}>
+                    <strong>Locked:</strong> Ship the previous project first.
+                  </Typography>
+                )}
 
-              {!unlocked && (
-                <p>
-                  <strong>Locked:</strong> Ship the previous project first.
-                </p>
-              )}
+                <Typography color="text.secondary" sx={{ mt: 1 }}>
+                  {project.description}
+                </Typography>
 
-              <p>
-                <strong>Cost:</strong> {formatNumber(project.locCost)} LOC,{" "}
-                {formatNumber(project.reputationCost)} reputation
-              </p>
+                <Typography sx={{ mt: 1 }}>
+                  <strong>Cost:</strong> {formatNumber(project.locCost)} LOC,{" "}
+                  {formatNumber(project.reputationCost)} reputation
+                </Typography>
 
-              <p>
-                <strong>Your progress:</strong>{" "}
-                {formatNumber(Math.min(state.linesOfCode, project.locCost))} /{" "}
-                {formatNumber(project.locCost)} LOC,{" "}
-                {formatNumber(
-                  Math.min(state.reputation, project.reputationCost),
-                )}{" "}
-                / {formatNumber(project.reputationCost)} reputation
-              </p>
+                <Typography>
+                  <strong>Your progress:</strong>{" "}
+                  {formatNumber(Math.min(state.linesOfCode, project.locCost))} /{" "}
+                  {formatNumber(project.locCost)} LOC,{" "}
+                  {formatNumber(
+                    Math.min(state.reputation, project.reputationCost),
+                  )}{" "}
+                  / {formatNumber(project.reputationCost)} reputation
+                </Typography>
 
-              <p>
-                <strong>Reward:</strong> {project.rewardLabel}
-              </p>
+                <Typography>
+                  <strong>Reward:</strong> {project.rewardLabel}
+                </Typography>
+              </CardContent>
 
-              <button
-                disabled={completed || !canAfford}
-                onClick={() => onShipProject(project.id)}
-              >
-                {completed ? "Shipped" : unlocked ? "Ship Project" : "Locked"}
-              </button>
-            </article>
+              <CardActions>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  disabled={completed || !canAfford}
+                  onClick={() => onShipProject(project.id)}
+                >
+                  {completed ? "Shipped" : unlocked ? "Ship Project" : "Locked"}
+                </Button>
+              </CardActions>
+            </Card>
           );
         })}
       </div>
