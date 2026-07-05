@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 type ClickActionsProps = {
   bugs: number;
@@ -17,7 +17,9 @@ export function ClickActions({
 }: ClickActionsProps) {
   return (
     <section>
-      <h2>Actions</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Actions
+      </Typography>
 
       <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
         <Button variant="contained" onClick={onWriteCode}>
