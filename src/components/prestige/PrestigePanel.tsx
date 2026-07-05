@@ -32,7 +32,9 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
 
   return (
     <section>
-      <h2>Prestige</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Prestige
+      </Typography>
 
       <Alert severity="warning" sx={{ mb: 2 }}>
         Prestige resets your current run, upgrades, projects, bugs, and
@@ -46,9 +48,8 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
           </Typography>
 
           <Typography color="text.secondary" sx={{ mt: 1 }}>
-            You will gain{" "}
-            <strong>{formatNumber(earnedPrestigePoints)}</strong> prestige
-            points.
+            You will gain <strong>{formatNumber(earnedPrestigePoints)}</strong>{" "}
+            prestige points.
           </Typography>
 
           <Typography sx={{ mt: 1 }}>
