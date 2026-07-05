@@ -11,6 +11,7 @@ import { MilestonePanel } from "./components/milestones/MilestonePanel";
 import { GameLayout } from "./components/layout/GameLayout";
 import { AchievementPanel } from "./components/achievements/AchievementPanel";
 import { ProjectPanel } from "./components/projects/ProjectPanel";
+import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
@@ -29,6 +30,8 @@ function App() {
         onFixBug={() => dispatch({ type: "FIX_BUG" })}
         onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
       />
+
+      <NextGoalPanel state={state} />
 
       <UpgradeShop
         state={state}
