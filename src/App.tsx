@@ -58,9 +58,8 @@ function App() {
 
       {state.totalLinesOfCode >= 100_000 && (
         <button onClick={() => dispatch({ type: "PRESTIGE" })}>
-          Prestige - Reset for {Math.floor(state.totalLinesOfCode / 100_000)}{" "}
+          Prestige - Reset for {state.totalLinesOfCode / 100_000}{" "}
           prestige point
-          {Math.floor(state.totalLinesOfCode / 100_000) === 1 ? "" : "s"}
         </button>
       )}
 

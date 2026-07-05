@@ -104,7 +104,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "PRESTIGE": {
-      const earnedPrestigePoints = Math.floor(state.totalLinesOfCode / 100_000);
+      const earnedPrestigePoints = state.totalLinesOfCode / 100_000;
 
       if (earnedPrestigePoints <= 0) return state;
 

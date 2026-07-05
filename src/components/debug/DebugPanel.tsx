@@ -29,6 +29,7 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
               min="0"
               value={locAmount}
               onChange={(event) => setLocAmount(Number(event.target.value))}
+              step="0.01"
             />
           </label>
 
@@ -49,6 +50,7 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
               onChange={(event) =>
                 setReputationAmount(Number(event.target.value))
               }
+              step="0.01"
             />
           </label>
 
@@ -70,6 +72,7 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
               min="0"
               value={bugsAmount}
               onChange={(event) => setBugsAmount(Number(event.target.value))}
+              step="0.01"
             />
           </label>
 
@@ -94,6 +97,7 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
               onChange={(event) =>
                 setPrestigeAmount(Number(event.target.value))
               }
+              step="0.01"
             />
           </label>
 
