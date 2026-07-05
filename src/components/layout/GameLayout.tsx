@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 
 type GameLayoutProps = {
   children: React.ReactNode;
@@ -17,7 +17,9 @@ export function GameLayout({ children }: GameLayoutProps) {
         </Typography>
       </Box>
 
-      <Box component="main">{children}</Box>
+      <Stack component="main" spacing={3}>
+        {children}
+      </Stack>
     </Container>
   );
 }
