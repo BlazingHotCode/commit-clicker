@@ -12,5 +12,6 @@ export function createSaveState(saved: Partial<GameState>): GameState {
     unlockedMilestones: saved.unlockedMilestones ?? [],
     unlockedAchievements: saved.unlockedAchievements ?? [],
     lastSavedAt: saved.lastSavedAt ?? Date.now(),
+    completedProjects: saved.completedProjects ?? [],
   };
 }
