@@ -1,5 +1,6 @@
 import { upgrades } from "../data/upgrades";
 import { getUpgradeCost } from "../engine/formulas";
+import { getEffectiveStats } from "../engine/stats";
 import { applyTick } from "../engine/tick";
 import type { GameAction } from "./actions";
 import { initialState } from "./initialState";
@@ -8,8 +9,9 @@ import type { GameState } from "./types";
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "WRITE_CODE": {
-      const gained = state.locPerClick;
-      const createBug = Math.random() < state.bugChance;
+      const stats = getEffectiveStats(state);
+      const gained = stats.locPerClick;
+      const createBug = Math.random() < stats.bugChance;
 
       return {
         ...state,
@@ -25,7 +27,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         bugs: state.bugs - 1,
-        reputation: state.reputation + state.reputationPerBug,
+        reputation:
+          state.reputation + getEffectiveStats(state).reputationPerBug,
         totalBugsFixed: state.totalBugsFixed + 1,
       };
     }

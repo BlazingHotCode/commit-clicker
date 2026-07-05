@@ -1,3 +1,4 @@
+import { getEffectiveStats } from "../../game/engine/stats";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
 import { ResourceItem } from "./ResourceItem";
@@ -7,6 +8,7 @@ type ResourceBarProps = {
 };
 
 export function ResourceBar({ state }: ResourceBarProps) {
+  const stats = getEffectiveStats(state)
   return (
     <section>
       <h2>Resources</h2>
@@ -23,11 +25,11 @@ export function ResourceBar({ state }: ResourceBarProps) {
         />
         <ResourceItem
           label="LOC per click"
-          value={formatNumber(state.locPerClick)}
+          value={formatNumber(stats.locPerClick)}
         />
         <ResourceItem
           label="LOC per second"
-          value={formatNumber(state.locPerSecond)}
+          value={formatNumber(stats.locPerSecond)}
         />
       </div>
     </section>

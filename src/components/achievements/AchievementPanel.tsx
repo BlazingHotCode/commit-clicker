@@ -22,6 +22,10 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
               </h3>
 
               <p>{achievement.description}</p>
+              <p>
+                <strong>Bonus: </strong>
+                {achievement.bonusLabel}
+              </p>
             </article>
           );
         })}

@@ -1,7 +1,9 @@
 import type { GameState } from "../state/types";
+import { getEffectiveStats } from "./stats";
 
 export function applyTick(state: GameState, deltaSeconds: number): GameState {
-  const gained = state.locPerSecond * deltaSeconds;
+  const stats = getEffectiveStats(state)
+  const gained = stats.locPerSecond * deltaSeconds;
 
   return {
     ...state,
