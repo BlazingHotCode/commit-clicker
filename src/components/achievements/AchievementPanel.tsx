@@ -15,13 +15,22 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
           const unlocked = achievement.isUnlocked(state);
 
           return (
-            <article key={achievement.id}>
+            <article
+              key={achievement.id}
+              className={unlocked ? "completed-card" : "locked-card"}
+            >
               <h3>
-  <span className={unlocked ? "status-badge status-complete" : "status-badge status-locked"}>
-    {unlocked ? "✓ Earned" : "✕ Locked"}
-  </span>
-  {achievement.name}
-</h3>
+                <span
+                  className={
+                    unlocked
+                      ? "status-badge status-complete"
+                      : "status-badge status-locked"
+                  }
+                >
+                  {unlocked ? "✓ Earned" : "✕ Locked"}
+                </span>
+                {achievement.name}
+              </h3>
 
               <p>{achievement.description}</p>
               <p>
