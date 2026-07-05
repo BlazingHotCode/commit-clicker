@@ -2,6 +2,7 @@ import {
   Card,
   CardContent,
   Chip,
+  Grid,
   LinearProgress,
   Paper,
   Typography,
@@ -21,7 +22,7 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
         Milestones
       </Typography>
 
-      <div className="milestone-grid">
+      <Grid container spacing={1.5}>
         {milestones.map((milestone) => {
           const progress = milestone.requiredTotalLoc
             ? Math.min(state.totalLinesOfCode / milestone.requiredTotalLoc, 1)
@@ -32,46 +33,48 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
           const unlocked = progress >= 1;
 
           return (
-            <Card
-              key={milestone.id}
-              variant="outlined"
-              className={unlocked ? "completed-card" : "locked-card"}
-            >
-              <CardContent>
-                <Typography variant="h6" component="h3">
-                  <Chip
-                    size="small"
-                    color={unlocked ? "success" : "error"}
-                    label={unlocked ? "Unlocked" : "Locked"}
-                    sx={{ mr: 1 }}
+            <Grid key={milestone.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <Card
+                key={milestone.id}
+                variant="outlined"
+                className={unlocked ? "completed-card" : "locked-card"}
+              >
+                <CardContent>
+                  <Typography variant="h6" component="h3">
+                    <Chip
+                      size="small"
+                      color={unlocked ? "success" : "error"}
+                      label={unlocked ? "Unlocked" : "Locked"}
+                      sx={{ mr: 1 }}
+                    />
+                    {milestone.name}
+                  </Typography>
+
+                  <Typography color="text.secondary" sx={{ mt: 1 }}>
+                    {milestone.description}
+                  </Typography>
+
+                  <LinearProgress
+                    variant="determinate"
+                    value={progress * 100}
+                    sx={{ mt: 2 }}
                   />
-                  {milestone.name}
-                </Typography>
 
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
-                  {milestone.description}
-                </Typography>
-
-                <LinearProgress
-                  variant="determinate"
-                  value={progress * 100}
-                  sx={{ mt: 2 }}
-                />
-
-                <Typography sx={{ mt: 1 }}>
-                  {milestone.requiredTotalLoc
-                    ? `${formatNumber(state.totalLinesOfCode)} / ${formatNumber(
-                        milestone.requiredTotalLoc,
-                      )} total LOC`
-                    : unlocked
-                      ? "Complete"
-                      : "Incomplete"}
-                </Typography>
-              </CardContent>
-            </Card>
+                  <Typography sx={{ mt: 1 }}>
+                    {milestone.requiredTotalLoc
+                      ? `${formatNumber(state.totalLinesOfCode)} / ${formatNumber(
+                          milestone.requiredTotalLoc,
+                        )} total LOC`
+                      : unlocked
+                        ? "Complete"
+                        : "Incomplete"}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           );
         })}
-      </div>
+      </Grid>
     </Paper>
   );
 }
