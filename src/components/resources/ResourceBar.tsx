@@ -23,14 +23,19 @@ export function ResourceBar({ state }: ResourceBarProps) {
           label="Reputation"
           value={formatNumber(state.reputation)}
         />
-        <ResourceItem
-          label="Prestige Points"
-          value={formatNumber(state.prestigePoints)}
-        />
-        <ResourceItem
-          label="Prestige bonus"
-          value={`+${Math.round(state.prestigePoints * 5)}% LOC`}
-        />
+        {(state.prestigePoints > 0 || state.totalLinesOfCode >= 100_000) && (
+          <>
+            <ResourceItem
+              label="Prestige Points"
+              value={formatNumber(state.prestigePoints)}
+            />
+
+            <ResourceItem
+              label="Prestige bonus"
+              value={`+${Math.round(state.prestigePoints * 5)}% LOC`}
+            />
+          </>
+        )}
         <ResourceItem
           label="LOC per click"
           value={formatNumber(stats.locPerClick)}
