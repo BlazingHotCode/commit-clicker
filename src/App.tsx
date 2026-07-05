@@ -110,7 +110,7 @@ function App() {
         <Card variant="outlined">
           <CardContent>
             <Typography color="text.secondary" sx={{ mb: 2 }}>
-              Commit Clicker v0.1 - local autosave enabled.
+              Commit Clicker v0.1 - Local autosave enabled
             </Typography>
 
             <Button
