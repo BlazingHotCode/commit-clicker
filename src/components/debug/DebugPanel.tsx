@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  Paper,
   Stack,
   TextField,
   Typography,
@@ -30,7 +31,7 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
   const stats = getEffectiveStats(state);
 
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Debug Tools
       </Typography>
@@ -296,6 +297,6 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
           </CardContent>
         </Card>
       </div>
-    </section>
+    </Paper>
   );
 }

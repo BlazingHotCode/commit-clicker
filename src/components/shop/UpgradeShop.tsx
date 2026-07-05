@@ -2,7 +2,7 @@ import { upgrades } from "../../game/data/upgrades";
 import { getUpgradeCost } from "../../game/engine/formulas";
 import type { GameState, UpgradeId } from "../../game/state/types";
 import { UpgradeCard } from "./UpgradeCard";
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 
 type UpgradeShopProps = {
   state: GameState;
@@ -11,7 +11,7 @@ type UpgradeShopProps = {
 
 export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 1, fontWeight: 700 }}>
         Upgrade Shop
       </Typography>
@@ -44,6 +44,6 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
           );
         })}
       </div>
-    </section>
+    </Paper>
   );
 }

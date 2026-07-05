@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Paper, Stack, Typography } from "@mui/material";
 
 type ClickActionsProps = {
   bugs: number;
@@ -16,7 +16,7 @@ export function ClickActions({
   onRefactorCode,
 }: ClickActionsProps) {
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Actions
       </Typography>
@@ -42,6 +42,6 @@ export function ClickActions({
       <Typography color="text.secondary" sx={{ mt: 2 }}>
         Refactor Code costs 5 reputation and removes up to 3 bugs.
       </Typography>
-    </section>
+    </Paper>
   );
 }

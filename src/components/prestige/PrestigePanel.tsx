@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Paper,
   Typography,
 } from "@mui/material";
 import type { GameState } from "../../game/state/types";
@@ -31,7 +32,7 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
   if (state.prestigePoints <= 0 && !canPrestige) return null;
 
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Prestige
       </Typography>
@@ -101,6 +102,6 @@ export function PrestigePanel({ state, onPrestige }: PrestigePanelProps) {
           </Button>
         </DialogActions>
       </Dialog>
-    </section>
+    </Paper>
   );
 }

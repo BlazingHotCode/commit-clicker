@@ -25,6 +25,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Paper,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -102,7 +103,7 @@ function App() {
         onPrestige={() => dispatch({ type: "PRESTIGE" })}
       />
 
-      <section>
+      <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
         <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
           Settings
         </Typography>
@@ -152,7 +153,7 @@ function App() {
             </Button>
           </DialogActions>
         </Dialog>
-      </section>
+      </Paper>
     </GameLayout>
   );
 }

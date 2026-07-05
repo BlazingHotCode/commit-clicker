@@ -3,6 +3,7 @@ import {
   CardContent,
   Chip,
   LinearProgress,
+  Paper,
   Typography,
 } from "@mui/material";
 import { milestones } from "../../game/data/milestones";
@@ -15,7 +16,7 @@ type MilestonePanelProps = {
 
 export function MilestonePanel({ state }: MilestonePanelProps) {
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Milestones
       </Typography>
@@ -71,6 +72,6 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
           );
         })}
       </div>
-    </section>
+    </Paper>
   );
 }

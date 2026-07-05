@@ -3,6 +3,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Paper,
   Typography,
 } from "@mui/material";
 import { projects } from "../../game/data/projects";
@@ -16,7 +17,7 @@ type ProjectPanelProps = {
 
 export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Projects
       </Typography>
@@ -95,6 +96,6 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
           );
         })}
       </div>
-    </section>
+    </Paper>
   );
 }

@@ -1,4 +1,4 @@
-import { Card, CardContent, Chip, Typography } from "@mui/material";
+import { Card, CardContent, Chip, Paper, Typography } from "@mui/material";
 import { achievements } from "../../game/data/achievements";
 import type { GameState } from "../../game/state/types";
 
@@ -8,7 +8,7 @@ type AchievementPanelProps = {
 
 export function AchievementPanel({ state }: AchievementPanelProps) {
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Achievements
       </Typography>
@@ -46,6 +46,6 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
           );
         })}
       </div>
-    </section>
+    </Paper>
   );
 }

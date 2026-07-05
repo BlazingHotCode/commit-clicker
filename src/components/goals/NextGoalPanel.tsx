@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   LinearProgress,
+  Paper,
   Typography,
 } from "@mui/material";
 import { projects } from "../../game/data/projects";
@@ -26,7 +27,7 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
 
   if (!nextProject) {
     return (
-      <section>
+      <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
         <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
           Next Goal
         </Typography>
@@ -35,7 +36,7 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
           You shipped every current project. The next major system should be
           prestige: reset your project for permanent reputation bonuses.
         </Alert>
-      </section>
+      </Paper>
     );
   }
 
@@ -52,7 +53,7 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
   );
 
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Next Goal
       </Typography>
@@ -97,6 +98,6 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
           </Typography>
         </CardContent>
       </Card>
-    </section>
+    </Paper>
   );
 }
