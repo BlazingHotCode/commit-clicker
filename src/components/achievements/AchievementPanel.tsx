@@ -1,4 +1,11 @@
-import { Card, CardContent, Chip, Paper, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Chip,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { achievements } from "../../game/data/achievements";
 import type { GameState } from "../../game/state/types";
 
@@ -13,39 +20,40 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
         Achievements
       </Typography>
 
-      <div className="achievement-grid">
+      <Grid container spacing={1.5}>
         {achievements.map((achievement) => {
           const unlocked = achievement.isUnlocked(state);
 
           return (
-            <Card
-              key={achievement.id}
-              variant="outlined"
-              className={unlocked ? "completed-card" : "locked-card"}
-            >
-              <CardContent>
-                <Typography variant="h6" component="h3">
-                  <Chip
-                    size="small"
-                    color={unlocked ? "success" : "error"}
-                    label={unlocked ? "Earned" : "Locked"}
-                    sx={{ mr: 1 }}
-                  />
-                  {achievement.name}
-                </Typography>
+            <Grid key={achievement.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <Card
+                variant="outlined"
+                className={unlocked ? "completed-card" : "locked-card"}
+              >
+                <CardContent>
+                  <Typography variant="h6" component="h3">
+                    <Chip
+                      size="small"
+                      color={unlocked ? "success" : "error"}
+                      label={unlocked ? "Earned" : "Locked"}
+                      sx={{ mr: 1 }}
+                    />
+                    {achievement.name}
+                  </Typography>
 
-                <Typography color="text.secondary" sx={{ mt: 1 }}>
-                  {achievement.description}
-                </Typography>
+                  <Typography color="text.secondary" sx={{ mt: 1 }}>
+                    {achievement.description}
+                  </Typography>
 
-                <Typography sx={{ mt: 1 }}>
-                  <strong>Bonus:</strong> {achievement.bonusLabel}
-                </Typography>
-              </CardContent>
-            </Card>
+                  <Typography sx={{ mt: 1 }}>
+                    <strong>Bonus:</strong> {achievement.bonusLabel}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           );
         })}
-      </div>
+      </Grid>
     </Paper>
   );
 }
