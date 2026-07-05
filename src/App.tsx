@@ -29,7 +29,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const DEBUG_TOOLS_ENABLED = true;
+const DEBUG_TOOLS_ENABLED = false;
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
