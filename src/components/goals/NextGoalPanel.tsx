@@ -27,7 +27,9 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
   if (!nextProject) {
     return (
       <section>
-        <h2>Next Goal</h2>
+        <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+          Next Goal
+        </Typography>
 
         <Alert severity="info" variant="outlined">
           You shipped every current project. The next major system should be
@@ -51,7 +53,9 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
 
   return (
     <section>
-      <h2>Next Goal</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Next Goal
+      </Typography>
 
       <Card variant="outlined">
         <CardContent>
