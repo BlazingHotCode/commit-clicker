@@ -1,3 +1,10 @@
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
 import type { Upgrade } from "../../game/data/upgrades";
 import type { UpgradeId } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -20,27 +27,45 @@ export function UpgradeCard({
   onBuy,
 }: UpgradeCardProps) {
   return (
-    <article className={locked ? "locked-card" : undefined}>
-      <h3>{upgrade.name}</h3>
-      <p>{upgrade.description}</p>
-      {locked && (
-        <p>
-          <strong>Locked:</strong> Ship more projects to unlock this upgrade.
-        </p>
-      )}
-      <p>
-        <strong>Effect:</strong> {upgrade.effectLabel}
-      </p>
-      <p>
-        <strong>Level:</strong> {level}
-      </p>
-      <p>
-        <strong>Cost:</strong> {formatNumber(cost)} LOC
-      </p>
+    <Card variant="outlined" className={locked ? "locked-card" : undefined}>
+      <CardContent>
+        <Typography variant="h6" component="h3">
+          {upgrade.name}
+        </Typography>
 
-      <button disabled={!canAfford} onClick={() => onBuy(upgrade.id)}>
-        {locked ? "Locked" : "Buy"}
-      </button>
-    </article>
+        <Typography color="text.secondary" sx={{ mt: 1 }}>
+          {upgrade.description}
+        </Typography>
+
+        {locked && (
+          <Typography color="error" sx={{ mt: 1 }}>
+            <strong>Locked:</strong> Ship more projects to unlock this upgrade.
+          </Typography>
+        )}
+
+        <Typography sx={{ mt: 1 }}>
+          <strong>Effect:</strong> {upgrade.effectLabel}
+        </Typography>
+
+        <Typography>
+          <strong>Level:</strong> {level}
+        </Typography>
+
+        <Typography>
+          <strong>Cost:</strong> {formatNumber(cost)} LOC
+        </Typography>
+      </CardContent>
+
+      <CardActions>
+        <Button
+          fullWidth
+          variant="contained"
+          disabled={!canAfford}
+          onClick={() => onBuy(upgrade.id)}
+        >
+          {locked ? "Locked" : "Buy"}
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
