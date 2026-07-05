@@ -28,6 +28,10 @@ export function ResourceBar({ state }: ResourceBarProps) {
           value={formatNumber(state.prestigePoints)}
         />
         <ResourceItem
+          label="Prestige bonus"
+          value={`+${Math.round(state.prestigePoints * 5)}% LOC`}
+        />
+        <ResourceItem
           label="LOC per click"
           value={formatNumber(stats.locPerClick)}
         />

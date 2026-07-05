@@ -7,6 +7,8 @@ export function getEffectiveStats(state: GameState) {
   let reputationPerBug = state.reputationPerBug;
   let bugChance = state.bugChance;
 
+  const prestigeMultiplier = 1 + state.prestigePoints * 0.05;
+
   for (const achievement of achievements) {
     if (!achievement.isUnlocked(state)) continue;
 
@@ -20,8 +22,8 @@ export function getEffectiveStats(state: GameState) {
   }
 
   return {
-    locPerClick,
-    locPerSecond,
+    locPerClick: locPerClick * prestigeMultiplier,
+    locPerSecond: locPerSecond * prestigeMultiplier,
     reputationPerBug,
     bugChance: Math.max(0.01, bugChance),
   };
