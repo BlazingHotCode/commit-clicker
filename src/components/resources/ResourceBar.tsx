@@ -31,6 +31,25 @@ export function ResourceBar({ state }: ResourceBarProps) {
           label="LOC per second"
           value={formatNumber(stats.locPerSecond)}
         />
+        <ResourceItem
+          label="Bug chance"
+          value={`${Math.round(stats.bugChance * 100)}%`}
+        />
+
+        <ResourceItem
+          label="Reputation per bug"
+          value={formatNumber(stats.reputationPerBug)}
+        />
+
+        <ResourceItem
+          label="Total LOC"
+          value={formatNumber(state.totalLinesOfCode)}
+        />
+
+        <ResourceItem
+          label="Bugs fixed"
+          value={formatNumber(state.totalBugsFixed)}
+        />
       </div>
     </section>
   );
