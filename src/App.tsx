@@ -64,6 +64,12 @@ function App() {
 
       <button
         onClick={() => {
+          const confirmed = window.confirm(
+            "Resetting your save will permanently delete all progress, including prestige points. Continue?",
+          );
+
+          if (!confirmed) return;
+
           clearSave();
           dispatch({ type: "RESET_GAME" });
         }}
