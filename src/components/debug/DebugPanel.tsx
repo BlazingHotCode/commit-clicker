@@ -1,8 +1,16 @@
 import { useState, type Dispatch } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { getEffectiveStats } from "../../game/engine/stats";
 import type { GameAction } from "../../game/state/actions";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
-import { getEffectiveStats } from "../../game/engine/stats";
 
 type DebugPanelProps = {
   state: GameState;
@@ -10,8 +18,6 @@ type DebugPanelProps = {
 };
 
 export function DebugPanel({ state, dispatch }: DebugPanelProps) {
-  const stats = getEffectiveStats(state);
-
   const [locAmount, setLocAmount] = useState(10_000);
   const [reputationAmount, setReputationAmount] = useState(100);
   const [bugsAmount, setBugsAmount] = useState(10);
@@ -21,234 +27,272 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
   const [reputationPerBugAmount, setReputationPerBugAmount] = useState(1);
   const [bugChanceAmount, setBugChanceAmount] = useState(0.1);
 
+  const stats = getEffectiveStats(state);
+
   return (
     <section>
       <h2>Debug Tools</h2>
 
       <div className="debug-grid">
-        <article>
-          <h3>Resources</h3>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+              Resources
+            </Typography>
 
-          <label>
-            LOC amount
-            <input
-              type="number"
-              min="0"
-              value={locAmount}
-              onChange={(event) => setLocAmount(Number(event.target.value))}
-              step="0.01"
-            />
-          </label>
+            <Stack spacing={2}>
+              <TextField
+                label="LOC amount"
+                type="number"
+                size="small"
+                value={locAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) => setLocAmount(Number(event.target.value))}
+              />
 
-          <button
-            onClick={() =>
-              dispatch({ type: "DEBUG_ADD_LOC", amount: locAmount })
-            }
-          >
-            Add LOC
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({ type: "DEBUG_ADD_LOC", amount: locAmount })
+                }
+              >
+                Add LOC
+              </Button>
 
-          <label>
-            Reputation amount
-            <input
-              type="number"
-              min="0"
-              value={reputationAmount}
-              onChange={(event) =>
-                setReputationAmount(Number(event.target.value))
-              }
-              step="0.01"
-            />
-          </label>
+              <TextField
+                label="Reputation amount"
+                type="number"
+                size="small"
+                value={reputationAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) =>
+                  setReputationAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_ADD_REPUTATION",
-                amount: reputationAmount,
-              })
-            }
-          >
-            Add Reputation
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_ADD_REPUTATION",
+                    amount: reputationAmount,
+                  })
+                }
+              >
+                Add Reputation
+              </Button>
 
-          <label>
-            Bugs amount
-            <input
-              type="number"
-              min="0"
-              value={bugsAmount}
-              onChange={(event) => setBugsAmount(Number(event.target.value))}
-              step="0.01"
-            />
-          </label>
+              <TextField
+                label="Bugs amount"
+                type="number"
+                size="small"
+                value={bugsAmount}
+                slotProps={{ htmlInput: { min: 0, step: 1 } }}
+                onChange={(event) => setBugsAmount(Number(event.target.value))}
+              />
 
-          <button
-            onClick={() =>
-              dispatch({ type: "DEBUG_ADD_BUGS", amount: bugsAmount })
-            }
-          >
-            Add Bugs
-          </button>
-        </article>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({ type: "DEBUG_ADD_BUGS", amount: bugsAmount })
+                }
+              >
+                Add Bugs
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
 
-        <article>
-          <h3>Production Stats</h3>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+              Production Stats
+            </Typography>
 
-          <label>
-            LOC per click
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={locPerClickAmount}
-              onChange={(event) =>
-                setLocPerClickAmount(Number(event.target.value))
-              }
-            />
-          </label>
+            <Stack spacing={2}>
+              <TextField
+                label="LOC per click"
+                type="number"
+                size="small"
+                value={locPerClickAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) =>
+                  setLocPerClickAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_SET_LOC_PER_CLICK",
-                amount: locPerClickAmount,
-              })
-            }
-          >
-            Set LOC Per Click
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_SET_LOC_PER_CLICK",
+                    amount: locPerClickAmount,
+                  })
+                }
+              >
+                Set LOC Per Click
+              </Button>
 
-          <label>
-            LOC per second
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={locPerSecondAmount}
-              onChange={(event) =>
-                setLocPerSecondAmount(Number(event.target.value))
-              }
-            />
-          </label>
+              <TextField
+                label="LOC per second"
+                type="number"
+                size="small"
+                value={locPerSecondAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) =>
+                  setLocPerSecondAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_SET_LOC_PER_SECOND",
-                amount: locPerSecondAmount,
-              })
-            }
-          >
-            Set LOC Per Second
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_SET_LOC_PER_SECOND",
+                    amount: locPerSecondAmount,
+                  })
+                }
+              >
+                Set LOC Per Second
+              </Button>
 
-          <label>
-            Reputation per bug
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={reputationPerBugAmount}
-              onChange={(event) =>
-                setReputationPerBugAmount(Number(event.target.value))
-              }
-            />
-          </label>
+              <TextField
+                label="Reputation per bug"
+                type="number"
+                size="small"
+                value={reputationPerBugAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) =>
+                  setReputationPerBugAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_SET_REPUTATION_PER_BUG",
-                amount: reputationPerBugAmount,
-              })
-            }
-          >
-            Set Reputation Per Bug
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_SET_REPUTATION_PER_BUG",
+                    amount: reputationPerBugAmount,
+                  })
+                }
+              >
+                Set Reputation Per Bug
+              </Button>
 
-          <label>
-            Bug chance
-            <input
-              type="number"
-              min="0"
-              max="1"
-              step="0.01"
-              value={bugChanceAmount}
-              onChange={(event) =>
-                setBugChanceAmount(Number(event.target.value))
-              }
-            />
-          </label>
+              <TextField
+                label="Bug chance"
+                type="number"
+                size="small"
+                value={bugChanceAmount}
+                slotProps={{ htmlInput: { min: 0, max: 1, step: 0.01 } }}
+                onChange={(event) =>
+                  setBugChanceAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_SET_BUG_CHANCE",
-                amount: bugChanceAmount,
-              })
-            }
-          >
-            Set Bug Chance
-          </button>
-        </article>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_SET_BUG_CHANCE",
+                    amount: bugChanceAmount,
+                  })
+                }
+              >
+                Set Bug Chance
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
 
-        <article>
-          <h3>Progression</h3>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+              Progression
+            </Typography>
 
-          <label>
-            Prestige points
-            <input
-              type="number"
-              min="0"
-              value={prestigeAmount}
-              onChange={(event) =>
-                setPrestigeAmount(Number(event.target.value))
-              }
-              step="0.01"
-            />
-          </label>
+            <Stack spacing={2}>
+              <TextField
+                label="Prestige points"
+                type="number"
+                size="small"
+                value={prestigeAmount}
+                slotProps={{ htmlInput: { min: 0, step: 0.01 } }}
+                onChange={(event) =>
+                  setPrestigeAmount(Number(event.target.value))
+                }
+              />
 
-          <button
-            onClick={() =>
-              dispatch({
-                type: "DEBUG_SET_PRESTIGE_POINTS",
-                amount: prestigeAmount,
-              })
-            }
-          >
-            Set Prestige Points
-          </button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  dispatch({
+                    type: "DEBUG_SET_PRESTIGE_POINTS",
+                    amount: prestigeAmount,
+                  })
+                }
+              >
+                Set Prestige Points
+              </Button>
 
-          <button onClick={() => dispatch({ type: "DEBUG_COMPLETE_PROJECTS" })}>
-            Complete All Projects
-          </button>
-        </article>
+              <Button
+                variant="outlined"
+                onClick={() => dispatch({ type: "DEBUG_COMPLETE_PROJECTS" })}
+              >
+                Complete All Projects
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
 
-        <article>
-          <h3>Current State</h3>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+              Current State
+            </Typography>
 
-          <p>LOC: {formatNumber(state.linesOfCode)}</p>
-          <p>Total LOC: {formatNumber(state.totalLinesOfCode)}</p>
-          <p>Reputation: {formatNumber(state.reputation)}</p>
-          <p>Bugs: {formatNumber(state.bugs)}</p>
-          <p>Projects: {state.completedProjects.length}</p>
-          <p>Prestige Points: {formatNumber(state.prestigePoints)}</p>
+            <Typography>LOC: {formatNumber(state.linesOfCode)}</Typography>
+            <Typography>
+              Total LOC: {formatNumber(state.totalLinesOfCode)}
+            </Typography>
+            <Typography>
+              Reputation: {formatNumber(state.reputation)}
+            </Typography>
+            <Typography>Bugs: {formatNumber(state.bugs)}</Typography>
+            <Typography>Projects: {state.completedProjects.length}</Typography>
+            <Typography>
+              Prestige Points: {formatNumber(state.prestigePoints)}
+            </Typography>
 
-          <p>Base LOC/click: {formatNumber(state.locPerClick)}</p>
-          <p>Effective LOC/click: {formatNumber(stats.locPerClick)}</p>
+            <Typography sx={{ mt: 2 }}>
+              Base LOC/click: {formatNumber(state.locPerClick)}
+            </Typography>
+            <Typography>
+              Effective LOC/click: {formatNumber(stats.locPerClick)}
+            </Typography>
 
-          <p>Base LOC/sec: {formatNumber(state.locPerSecond)}</p>
-          <p>Effective LOC/sec: {formatNumber(stats.locPerSecond)}</p>
+            <Typography sx={{ mt: 2 }}>
+              Base LOC/sec: {formatNumber(state.locPerSecond)}
+            </Typography>
+            <Typography>
+              Effective LOC/sec: {formatNumber(stats.locPerSecond)}
+            </Typography>
 
-          <p>Base reputation/bug: {formatNumber(state.reputationPerBug)}</p>
-          <p>
-            Effective reputation/bug: {formatNumber(stats.reputationPerBug)}
-          </p>
+            <Typography sx={{ mt: 2 }}>
+              Base reputation/bug: {formatNumber(state.reputationPerBug)}
+            </Typography>
+            <Typography>
+              Effective reputation/bug: {formatNumber(stats.reputationPerBug)}
+            </Typography>
 
-          <p>Base bug chance: {Math.round(state.bugChance * 100)}%</p>
-          <p>Effective bug chance: {Math.round(stats.bugChance * 100)}%</p>
-        </article>
+            <Typography sx={{ mt: 2 }}>
+              Base bug chance: {Math.round(state.bugChance * 100)}%
+            </Typography>
+            <Typography>
+              Effective bug chance: {Math.round(stats.bugChance * 100)}%
+            </Typography>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
