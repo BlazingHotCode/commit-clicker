@@ -1,16 +1,23 @@
+import { Box, Container, Typography } from "@mui/material";
+
 type GameLayoutProps = {
   children: React.ReactNode;
 };
 
 export function GameLayout({ children }: GameLayoutProps) {
   return (
-    <main>
-      <header className="game-header">
-        <h1>Commit Clicker</h1>
-        <p>Write code. Create bugs. Gain reputation.</p>
-      </header>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Box component="header" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h1" sx={{ fontWeight: 800 }}>
+          Commit Clicker
+        </Typography>
 
-      {children}
-    </main>
+        <Typography color="text.secondary" sx={{ mt: 1 }}>
+          Write code. Create bugs. Gain reputation. Ship projects.
+        </Typography>
+      </Box>
+
+      <Box component="main">{children}</Box>
+    </Container>
   );
 }
