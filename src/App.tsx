@@ -10,6 +10,7 @@ import { useAutoSave } from "./hooks/useAutoSave";
 import { MilestonePanel } from "./components/milestones/MilestonePanel";
 import { GameLayout } from "./components/layout/GameLayout";
 import { AchievementPanel } from "./components/achievements/AchievementPanel";
+import { ProjectPanel } from "./components/projects/ProjectPanel";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
@@ -31,6 +32,13 @@ function App() {
         state={state}
         onBuyUpgrade={(upgradeId) =>
           dispatch({ type: "BUY_UPGRADE", upgradeId })
+        }
+      />
+
+      <ProjectPanel
+        state={state}
+        onShipProject={(projectId) =>
+          dispatch({ type: "SHIP_PROJECT", projectId })
         }
       />
 
