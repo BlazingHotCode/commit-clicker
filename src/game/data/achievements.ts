@@ -57,4 +57,14 @@ export const achievements: Achievement[] = [
       locPerSecond: 1,
     },
   },
+  {
+    id: "threeProjects",
+    name: "Shipping Streak",
+    description: "Ship 3 projects.",
+    bonusLabel: "+2 LOC / click",
+    isUnlocked: (state) => state.completedProjects.length >= 3,
+    modifiers: {
+      locPerClick: 2,
+    },
+  },
 ];
