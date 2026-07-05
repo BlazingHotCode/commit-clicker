@@ -1,3 +1,5 @@
+import { Button, Stack } from "@mui/material";
+
 type ClickActionsProps = {
   bugs: number;
   reputation: number;
@@ -17,17 +19,24 @@ export function ClickActions({
     <section>
       <h2>Actions</h2>
 
-      <div className="actions">
-        <button onClick={onWriteCode}>Write Code</button>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+        <Button variant="contained" onClick={onWriteCode}>
+          Write Code
+        </Button>
 
-        <button onClick={onFixBug} disabled={bugs <= 0}>
+        <Button variant="outlined" onClick={onFixBug} disabled={bugs <= 0}>
           Fix Bug
-        </button>
+        </Button>
 
-        <button onClick={onRefactorCode} disabled={bugs <= 0 || reputation < 5}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={onRefactorCode}
+          disabled={bugs <= 0 || reputation < 5}
+        >
           Refactor Code
-        </button>
-      </div>
+        </Button>
+      </Stack>
       <p className="action-help">
         Refactor Code costs 5 reputation and removes up to 3 bugs.
       </p>
