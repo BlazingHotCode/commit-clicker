@@ -32,7 +32,7 @@ export function ResourceBar({ state }: ResourceBarProps) {
 
             <ResourceItem
               label="Prestige bonus"
-              value={`+${Math.round(state.prestigePoints * 5)}% LOC`}
+              value={`+${state.prestigePoints * 5}% LOC`}
             />
           </>
         )}

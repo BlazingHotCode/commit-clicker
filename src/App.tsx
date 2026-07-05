@@ -13,6 +13,7 @@ import { AchievementPanel } from "./components/achievements/AchievementPanel";
 import { ProjectPanel } from "./components/projects/ProjectPanel";
 import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 import { DebugPanel } from "./components/debug/DebugPanel";
+import { PrestigePanel } from "./components/prestige/PrestigePanel";
 
 const DEBUG_TOOLS_ENABLED = false;
 
@@ -56,12 +57,10 @@ function App() {
 
       {DEBUG_TOOLS_ENABLED && <DebugPanel state={state} dispatch={dispatch} />}
 
-      {state.totalLinesOfCode >= 100_000 && (
-        <button onClick={() => dispatch({ type: "PRESTIGE" })}>
-          Prestige - Reset for {state.totalLinesOfCode / 100_000}{" "}
-          prestige point
-        </button>
-      )}
+      <PrestigePanel
+        state={state}
+        onPrestige={() => dispatch({ type: "PRESTIGE" })}
+      />
 
       <button
         onClick={() => {
