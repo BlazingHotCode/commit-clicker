@@ -63,7 +63,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         case "juniorDev":
           return {
             ...nextState,
-            locPerClick: nextState.locPerSecond + 1,
+            locPerSecond: nextState.locPerSecond + 1,
           };
 
         case "unitTests":
