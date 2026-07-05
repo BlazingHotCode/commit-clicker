@@ -14,4 +14,8 @@ export type GameAction =
   | { type: "DEBUG_ADD_REPUTATION"; amount: number }
   | { type: "DEBUG_ADD_BUGS"; amount: number }
   | { type: "DEBUG_SET_PRESTIGE_POINTS"; amount: number }
-  | { type: "DEBUG_COMPLETE_PROJECTS" };
+  | { type: "DEBUG_COMPLETE_PROJECTS" }
+  | { type: "DEBUG_SET_LOC_PER_CLICK"; amount: number }
+  | { type: "DEBUG_SET_LOC_PER_SECOND"; amount: number }
+  | { type: "DEBUG_SET_REPUTATION_PER_BUG"; amount: number }
+  | { type: "DEBUG_SET_BUG_CHANCE"; amount: number };

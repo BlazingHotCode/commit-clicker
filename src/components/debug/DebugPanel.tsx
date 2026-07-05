@@ -13,6 +13,10 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
   const [reputationAmount, setReputationAmount] = useState(100);
   const [bugsAmount, setBugsAmount] = useState(10);
   const [prestigeAmount, setPrestigeAmount] = useState(1);
+  const [locPerClickAmount, setLocPerClickAmount] = useState(1);
+  const [locPerSecondAmount, setLocPerSecondAmount] = useState(1);
+  const [reputationPerBugAmount, setReputationPerBugAmount] = useState(1);
+  const [bugChanceAmount, setBugChanceAmount] = useState(0.1);
 
   return (
     <section>
@@ -82,6 +86,107 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
             }
           >
             Add Bugs
+          </button>
+        </article>
+
+        <article>
+          <h3>Production Stats</h3>
+
+          <label>
+            LOC per click
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={locPerClickAmount}
+              onChange={(event) =>
+                setLocPerClickAmount(Number(event.target.value))
+              }
+            />
+          </label>
+
+          <button
+            onClick={() =>
+              dispatch({
+                type: "DEBUG_SET_LOC_PER_CLICK",
+                amount: locPerClickAmount,
+              })
+            }
+          >
+            Set LOC Per Click
+          </button>
+
+          <label>
+            LOC per second
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={locPerSecondAmount}
+              onChange={(event) =>
+                setLocPerSecondAmount(Number(event.target.value))
+              }
+            />
+          </label>
+
+          <button
+            onClick={() =>
+              dispatch({
+                type: "DEBUG_SET_LOC_PER_SECOND",
+                amount: locPerSecondAmount,
+              })
+            }
+          >
+            Set LOC Per Second
+          </button>
+
+          <label>
+            Reputation per bug
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={reputationPerBugAmount}
+              onChange={(event) =>
+                setReputationPerBugAmount(Number(event.target.value))
+              }
+            />
+          </label>
+
+          <button
+            onClick={() =>
+              dispatch({
+                type: "DEBUG_SET_REPUTATION_PER_BUG",
+                amount: reputationPerBugAmount,
+              })
+            }
+          >
+            Set Reputation Per Bug
+          </button>
+
+          <label>
+            Bug chance
+            <input
+              type="number"
+              min="0"
+              max="1"
+              step="0.01"
+              value={bugChanceAmount}
+              onChange={(event) =>
+                setBugChanceAmount(Number(event.target.value))
+              }
+            />
+          </label>
+
+          <button
+            onClick={() =>
+              dispatch({
+                type: "DEBUG_SET_BUG_CHANCE",
+                amount: bugChanceAmount,
+              })
+            }
+          >
+            Set Bug Chance
           </button>
         </article>
 

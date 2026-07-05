@@ -163,6 +163,34 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     }
 
+    case "DEBUG_SET_LOC_PER_CLICK": {
+      return {
+        ...state,
+        locPerClick: Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_SET_LOC_PER_SECOND": {
+      return {
+        ...state,
+        locPerSecond: Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_SET_REPUTATION_PER_BUG": {
+      return {
+        ...state,
+        reputationPerBug: Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_SET_BUG_CHANCE": {
+      return {
+        ...state,
+        bugChance: Math.max(0, Math.min(1, action.amount)),
+      };
+    }
+
     default:
       return state;
   }
