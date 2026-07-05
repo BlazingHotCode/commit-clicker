@@ -5,6 +5,7 @@ import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
 import { useGameLoop } from "./hooks/useGameLoop";
 import { formatNumber } from "./game/utils/formatNumber";
+import { ResourceBar } from "./components/resources/ResourceBar";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -15,14 +16,7 @@ function App() {
     <main>
       <h1>Commit Clicker</h1>
 
-      <section>
-        <h2>Resources</h2>
-        <p>Lines of Code: {formatNumber(state.linesOfCode)}</p>
-        <p>Bugs: {state.bugs}</p>
-        <p>Reputation: {formatNumber(state.reputation)}</p>
-        <p>LOC per click: {state.locPerClick}</p>
-        <p>LOC per second: {state.locPerSecond}</p>
-      </section>
+      <ResourceBar state={state} />
 
       <section>
         <h2>Actions</h2>
