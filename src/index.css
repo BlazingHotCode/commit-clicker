@@ -59,16 +59,6 @@ section {
   background: #10251a !important;
 }
 
-.action-help,
-.section-help {
-  color: #9ca3af;
-  font-size: 0.9rem;
-}
-
-.action-help {
-  margin-bottom: 0;
-}
-
 .section-help {
   margin-top: -0.25rem;
 }

@@ -39,9 +39,9 @@ export function ClickActions({
           Refactor Code
         </Button>
       </Stack>
-      <p className="action-help">
+      <Typography color="text.secondary" sx={{ mt: 2 }}>
         Refactor Code costs 5 reputation and removes up to 3 bugs.
-      </p>
+      </Typography>
     </section>
   );
 }
