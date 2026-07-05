@@ -21,7 +21,7 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
           const unlocked = progress >= 1;
 
           return (
-            <article key={milestone.id}>
+            <article key={milestone.id} className={unlocked ? "completed-card" : "locked-card"}>
               <h3>
                 <span
                   className={
