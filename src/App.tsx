@@ -54,7 +54,7 @@ function App() {
 
       <AchievementPanel state={state} />
 
-      {DEBUG_TOOLS_ENABLED && <DebugPanel state={state} />}
+      {DEBUG_TOOLS_ENABLED && <DebugPanel state={state} dispatch={dispatch} />}
 
       {state.totalLinesOfCode >= 100_000 && (
         <button onClick={() => dispatch({ type: "PRESTIGE" })}>

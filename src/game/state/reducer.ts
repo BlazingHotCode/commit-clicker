@@ -125,6 +125,44 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "RESET_GAME":
       return initialState;
 
+    case "DEBUG_ADD_LOC": {
+      const amount = Math.max(0, action.amount);
+
+      return {
+        ...state,
+        linesOfCode: state.linesOfCode + amount,
+        totalLinesOfCode: state.totalLinesOfCode + amount,
+      };
+    }
+
+    case "DEBUG_ADD_REPUTATION": {
+      return {
+        ...state,
+        reputation: state.reputation + Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_ADD_BUGS": {
+      return {
+        ...state,
+        bugs: state.bugs + Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_SET_PRESTIGE_POINTS": {
+      return {
+        ...state,
+        prestigePoints: Math.max(0, action.amount),
+      };
+    }
+
+    case "DEBUG_COMPLETE_PROJECTS": {
+      return {
+        ...state,
+        completedProjects: projects.map((project) => project.id),
+      };
+    }
+
     default:
       return state;
   }

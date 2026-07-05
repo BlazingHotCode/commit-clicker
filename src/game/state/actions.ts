@@ -9,4 +9,9 @@ export type GameAction =
   | { type: "PRESTIGE" }
   | { type: "TICK"; deltaSeconds: number }
   | { type: "LOAD_GAME"; state: GameState }
-  | { type: "RESET_GAME" };
+  | { type: "RESET_GAME" }
+  | { type: "DEBUG_ADD_LOC"; amount: number }
+  | { type: "DEBUG_ADD_REPUTATION"; amount: number }
+  | { type: "DEBUG_ADD_BUGS"; amount: number }
+  | { type: "DEBUG_SET_PRESTIGE_POINTS"; amount: number }
+  | { type: "DEBUG_COMPLETE_PROJECTS" };
