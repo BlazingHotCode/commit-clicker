@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { getEffectiveStats } from "../../game/engine/stats";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
@@ -11,7 +11,7 @@ type ResourceBarProps = {
 export function ResourceBar({ state }: ResourceBarProps) {
   const stats = getEffectiveStats(state);
   return (
-    <section>
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
         Resources
       </Typography>
@@ -69,6 +69,6 @@ export function ResourceBar({ state }: ResourceBarProps) {
 
         <ResourceItem label="Autosave" value="Every 3 seconds" />
       </div>
-    </section>
+    </Paper>
   );
 }
