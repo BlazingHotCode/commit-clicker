@@ -8,6 +8,7 @@ import { ClickActions } from "./components/actions/ClickActions";
 import { clearSave, loadGame } from "./game/engine/save";
 import { useAutoSave } from "./hooks/useAutoSave";
 import { MilestonePanel } from "./components/milestones/MilestonePanel";
+import { GameLayout } from "./components/layout/GameLayout";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
@@ -16,8 +17,7 @@ function App() {
   useAutoSave(state)
 
   return (
-    <main>
-      <h1>Commit Clicker</h1>
+    <GameLayout>
 
       <ResourceBar state={state} />
 
@@ -44,7 +44,7 @@ function App() {
       >
         Reset Save
       </button>
-    </main>
+    </GameLayout>
   );
 }
 

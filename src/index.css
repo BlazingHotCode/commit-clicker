@@ -95,3 +95,16 @@ article button {
   height: 100%;
   background: #22c55e;
 }
+
+.game-header {
+  margin-bottom: 2rem;
+}
+
+.game-header h1 {
+  margin-bottom: 0.25rem;
+}
+
+.game-header p {
+  color: #9ca3af;
+  margin-top: 0;
+}
