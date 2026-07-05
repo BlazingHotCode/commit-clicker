@@ -13,15 +13,19 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
 
       <div className="milestone-grid">
         {milestones.map((milestone) => {
-          const progress = Math.min(
-            state.totalLinesOfCode / milestone.requiredTotalLoc,
-            1,
-          );
+          const progress = milestone.requiredTotalLoc
+            ? Math.min(state.totalLinesOfCode / milestone.requiredTotalLoc, 1)
+            : milestone.isUnlocked?.(state)
+              ? 1
+              : 0;
 
           const unlocked = progress >= 1;
 
           return (
-            <article key={milestone.id} className={unlocked ? "completed-card" : "locked-card"}>
+            <article
+              key={milestone.id}
+              className={unlocked ? "completed-card" : "locked-card"}
+            >
               <h3>
                 <span
                   className={
@@ -45,8 +49,13 @@ export function MilestonePanel({ state }: MilestonePanelProps) {
               </div>
 
               <p>
-                {formatNumber(state.totalLinesOfCode)} /{" "}
-                {formatNumber(milestone.requiredTotalLoc)} total LOC
+                {milestone.requiredTotalLoc
+                  ? `${formatNumber(state.totalLinesOfCode)} / ${formatNumber(
+                      milestone.requiredTotalLoc,
+                    )} total LOC`
+                  : unlocked
+                    ? "Complete"
+                    : "Incomplete"}
               </p>
             </article>
           );

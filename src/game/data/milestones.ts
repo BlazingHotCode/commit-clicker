@@ -1,8 +1,11 @@
+import type { GameState } from "../state/types";
+
 export type Milestone = {
   id: string;
   name: string;
   description: string;
-  requiredTotalLoc: number;
+  requiredTotalLoc?: number;
+  isUnlocked?: (state: GameState) => boolean;
 };
 
 export const milestones: Milestone[] = [
@@ -23,5 +26,11 @@ export const milestones: Milestone[] = [
     name: "Tiny Startup",
     description: "You accidentally became a founder.",
     requiredTotalLoc: 10_000,
+  },
+  {
+    id: "projectStudio",
+    name: "Project Studio",
+    description: "You shipped 3 projects.",
+    isUnlocked: (state) => state.completedProjects.length >= 3,
   },
 ];
