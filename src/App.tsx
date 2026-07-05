@@ -4,6 +4,7 @@ import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
 import { useGameLoop } from "./hooks/useGameLoop";
+import { formatNumber } from "./game/utils/formatNumber";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
@@ -16,9 +17,9 @@ function App() {
 
       <section>
         <h2>Resources</h2>
-        <p>Lines of Code: {Math.floor(state.linesOfCode)}</p>
+        <p>Lines of Code: {formatNumber(state.linesOfCode)}</p>
         <p>Bugs: {state.bugs}</p>
-        <p>Reputation: {state.reputation}</p>
+        <p>Reputation: {formatNumber(state.reputation)}</p>
         <p>LOC per click: {state.locPerClick}</p>
         <p>LOC per second: {state.locPerSecond}</p>
       </section>

@@ -1,5 +1,6 @@
 import type { Upgrade } from "../../game/data/upgrades";
 import type { UpgradeId } from "../../game/state/types";
+import { formatNumber } from "../../game/utils/formatNumber";
 
 type UpgradeCardProps = {
   upgrade: Upgrade;
@@ -21,7 +22,7 @@ export function UpgradeCard({
       <h3>{upgrade.name}</h3>
       <p>{upgrade.description}</p>
       <p>Level: {level}</p>
-      <p>Cost: {cost} LOC</p>
+      <p>Cost: {formatNumber(cost)} LOC</p>
 
       <button disabled={!canAfford} onClick={() => onBuy(upgrade.id)}>
         Buy
