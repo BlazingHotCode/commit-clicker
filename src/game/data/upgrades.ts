@@ -101,4 +101,18 @@ export const upgrades: Upgrade[] = [
       locPerSecond: state.locPerSecond + 50,
     }),
   },
+  {
+    id: "aiCodeAssistant",
+    name: "AI Code Assistant",
+    description: "+100 LOC per click, +100 LOC per second",
+    effectLabel: "+100 LOC / click, +100 LOC / second",
+    baseCost: 100_000,
+    costMultiplier: 2,
+    requiredProjectIds: ["deploymentPlatform"],
+    apply: (state) => ({
+      ...state,
+      locPerClick: state.locPerClick + 100,
+      locPerSecond: state.locPerSecond + 100,
+    }),
+  },
 ];

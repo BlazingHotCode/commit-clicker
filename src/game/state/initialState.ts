@@ -23,6 +23,7 @@ export const initialState: GameState = {
     debugger: 0,
     seniorDev: 0,
     techLead: 0,
+    aiCodeAssistant: 0,
   },
 
   unlockedMilestones: [],
