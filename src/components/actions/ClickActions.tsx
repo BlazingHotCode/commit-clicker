@@ -25,9 +25,12 @@ export function ClickActions({
         </button>
 
         <button onClick={onRefactorCode} disabled={bugs <= 0 || reputation < 5}>
-          Refactor Code - Spend 5 reputation to remove 3 bugs
+          Refactor Code
         </button>
       </div>
+      <p className="action-help">
+        Refactor Code costs 5 reputation and removes up to 3 bugs.
+      </p>
     </section>
   );
 }
