@@ -9,16 +9,16 @@ import { clearSave, loadGame } from "./game/engine/save";
 import { useAutoSave } from "./hooks/useAutoSave";
 import { MilestonePanel } from "./components/milestones/MilestonePanel";
 import { GameLayout } from "./components/layout/GameLayout";
+import { AchievementPanel } from "./components/achievements/AchievementPanel";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState, loadGame);
 
   useGameLoop(dispatch);
-  useAutoSave(state)
+  useAutoSave(state);
 
   return (
     <GameLayout>
-
       <ResourceBar state={state} />
 
       <ClickActions
@@ -36,10 +36,12 @@ function App() {
 
       <MilestonePanel state={state} />
 
+      <AchievementPanel state={state} />
+
       <button
         onClick={() => {
           clearSave();
-          dispatch({ type: "RESET_GAME"})
+          dispatch({ type: "RESET_GAME" });
         }}
       >
         Reset Save

@@ -17,7 +17,7 @@ export const achievements: Achievement[] = [
   {
     id: "hundredLoc",
     name: "Hello, Production",
-    description: "Write 1-- total LOC.",
+    description: "Write 100 total LOC.",
     isUnlocked: (state) => state.totalLinesOfCode >= 100,
   },
   {

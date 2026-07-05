@@ -24,4 +24,6 @@ export const initialState: GameState = {
   },
 
   unlockedMilestones: [],
+
+  unlockedAchievements: [],
 };

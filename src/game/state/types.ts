@@ -23,4 +23,6 @@ export type GameState = {
   upgrades: Record<UpgradeId, number>;
 
   unlockedMilestones: string[];
+
+  unlockedAchievements: string[];
 };
