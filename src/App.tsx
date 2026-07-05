@@ -23,6 +23,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Snackbar,
 } from "@mui/material";
 
 const DEBUG_TOOLS_ENABLED = false;
@@ -38,12 +39,6 @@ function App() {
     if (state.offlineLocGained <= 0) return;
 
     setShowOfflineAlert(true);
-
-    const timeout = window.setTimeout(() => {
-      setShowOfflineAlert(false);
-    }, 60_000);
-
-    return () => window.clearTimeout(timeout);
   }, [state.offlineLocGained]);
 
   useGameLoop(dispatch);
@@ -53,16 +48,21 @@ function App() {
     <GameLayout>
       <ResourceBar state={state} />
 
-      {showOfflineAlert && state.offlineLocGained > 0 && (
+      <Snackbar
+        open={showOfflineAlert && state.offlineLocGained > 0}
+        autoHideDuration={5000}
+        onClose={() => setShowOfflineAlert(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
         <Alert
           severity="success"
-          sx={{ mb: 2 }}
+          variant="filled"
           onClose={() => setShowOfflineAlert(false)}
         >
           Welcome back! You gained {formatNumber(state.offlineLocGained)} LOC
           while you were away.
         </Alert>
-      )}
+      </Snackbar>
 
       <ClickActions
         bugs={state.bugs}
