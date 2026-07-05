@@ -5,9 +5,15 @@ const SAVE_KEY = "commit-clicker-save";
 
 export function saveGame(state: GameState) {
   try {
-    localStorage.setItem(SAVE_KEY, JSON.stringify(state))
+    localStorage.setItem(
+      SAVE_KEY,
+      JSON.stringify({
+        ...state,
+        lastSavedAt: Date.now(),
+      }),
+    );
   } catch (error) {
-    console.error("Failed to save game:", error)
+    console.error("Failed to save game:", error);
   }
 }
 
@@ -17,12 +23,24 @@ export function loadGame(): GameState {
 
     if (!saved) return initialState;
 
-    return {
+    const parsed = {
       ...initialState,
       ...JSON.parse(saved),
     };
+
+    const now = Date.now();
+    const secondsAway = Math.floor((now - parsed.lastSavedAt) / 1000);
+    const cappedSecondsAway = Math.min(secondsAway, 60 * 60 * 8);
+    const offlineLoc = parsed.locPerSecond * cappedSecondsAway;
+
+    return {
+      ...parsed,
+      linesOfCode: parsed.linesOfCode + offlineLoc,
+      totalLinesOfCode: parsed.totalLinesOfCode + offlineLoc,
+      lastSavedAt: now,
+    };
   } catch (error) {
-    console.error("Failed to load game:", error)
+    console.error("Failed to load game:", error);
     return initialState;
   }
 }

@@ -13,6 +13,8 @@ export const initialState: GameState = {
   bugChance: 0.1,
   reputationPerBug: 1,
 
+  lastSavedAt: Date.now(),
+
   upgrades: {
     mechanicalKeyboard: 0,
     autocomplete: 0,

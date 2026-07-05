@@ -17,5 +17,8 @@ export type GameState = {
   locPerSecond: number;
   bugChance: number;
   reputationPerBug: number;
+
+  lastSavedAt: number;
+
   upgrades: Record<UpgradeId, number>;
 };
