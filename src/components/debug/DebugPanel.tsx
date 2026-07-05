@@ -2,6 +2,7 @@ import { useState, type Dispatch } from "react";
 import type { GameAction } from "../../game/state/actions";
 import type { GameState } from "../../game/state/types";
 import { formatNumber } from "../../game/utils/formatNumber";
+import { getEffectiveStats } from "../../game/engine/stats";
 
 type DebugPanelProps = {
   state: GameState;
@@ -9,6 +10,8 @@ type DebugPanelProps = {
 };
 
 export function DebugPanel({ state, dispatch }: DebugPanelProps) {
+  const stats = getEffectiveStats(state);
+
   const [locAmount, setLocAmount] = useState(10_000);
   const [reputationAmount, setReputationAmount] = useState(100);
   const [bugsAmount, setBugsAmount] = useState(10);
@@ -231,6 +234,20 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
           <p>Bugs: {formatNumber(state.bugs)}</p>
           <p>Projects: {state.completedProjects.length}</p>
           <p>Prestige Points: {formatNumber(state.prestigePoints)}</p>
+
+          <p>Base LOC/click: {formatNumber(state.locPerClick)}</p>
+          <p>Effective LOC/click: {formatNumber(stats.locPerClick)}</p>
+
+          <p>Base LOC/sec: {formatNumber(state.locPerSecond)}</p>
+          <p>Effective LOC/sec: {formatNumber(stats.locPerSecond)}</p>
+
+          <p>Base reputation/bug: {formatNumber(state.reputationPerBug)}</p>
+          <p>
+            Effective reputation/bug: {formatNumber(stats.reputationPerBug)}
+          </p>
+
+          <p>Base bug chance: {Math.round(state.bugChance * 100)}%</p>
+          <p>Effective bug chance: {Math.round(stats.bugChance * 100)}%</p>
         </article>
       </div>
     </section>
