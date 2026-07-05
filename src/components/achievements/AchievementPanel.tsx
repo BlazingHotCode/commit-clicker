@@ -9,7 +9,9 @@ type AchievementPanelProps = {
 export function AchievementPanel({ state }: AchievementPanelProps) {
   return (
     <section>
-      <h2>Achievements</h2>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Achievements
+      </Typography>
 
       <div className="achievement-grid">
         {achievements.map((achievement) => {
