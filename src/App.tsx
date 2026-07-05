@@ -18,12 +18,15 @@ import { formatNumber } from "./game/utils/formatNumber";
 import {
   Alert,
   Button,
+  Card,
+  CardContent,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Snackbar,
+  Typography,
 } from "@mui/material";
 
 const DEBUG_TOOLS_ENABLED = false;
@@ -102,17 +105,21 @@ function App() {
       <section>
         <h2>Settings</h2>
 
-        <p className="section-help">
-          Commit Clicker v0.1 - local autosave enabled.
-        </p>
+        <Card variant="outlined">
+          <CardContent>
+            <Typography color="text.secondary" sx={{ mb: 2 }}>
+              Commit Clicker v0.1 - local autosave enabled.
+            </Typography>
 
-        <Button
-          variant="outlined"
-          color="error"
-          onClick={() => setResetDialogOpen(true)}
-        >
-          Reset Save
-        </Button>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => setResetDialogOpen(true)}
+            >
+              Reset Save
+            </Button>
+          </CardContent>
+        </Card>
 
         <Dialog
           open={resetDialogOpen}
