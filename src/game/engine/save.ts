@@ -37,6 +37,7 @@ export function loadGame(): GameState {
       ...parsed,
       linesOfCode: parsed.linesOfCode + offlineLoc,
       totalLinesOfCode: parsed.totalLinesOfCode + offlineLoc,
+      offlineLocGained: offlineLoc,
       lastSavedAt: now,
     };
   } catch (error) {

@@ -14,6 +14,7 @@ import { ProjectPanel } from "./components/projects/ProjectPanel";
 import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 import { DebugPanel } from "./components/debug/DebugPanel";
 import { PrestigePanel } from "./components/prestige/PrestigePanel";
+import { formatNumber } from "./game/utils/formatNumber";
 
 const DEBUG_TOOLS_ENABLED = false;
 
@@ -26,6 +27,16 @@ function App() {
   return (
     <GameLayout>
       <ResourceBar state={state} />
+
+      {state.offlineLocGained > 0 && (
+        <section>
+          <h2>Welcome Back</h2>
+          <p>
+            You gained {formatNumber(state.offlineLocGained)} LOC while you were
+            away.
+          </p>
+        </section>
+      )}
 
       <ClickActions
         bugs={state.bugs}
