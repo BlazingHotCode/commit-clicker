@@ -103,7 +103,9 @@ function App() {
       />
 
       <section>
-        <h2>Settings</h2>
+        <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+          Settings
+        </Typography>
 
         <Card variant="outlined">
           <CardContent>
