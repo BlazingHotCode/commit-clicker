@@ -25,7 +25,16 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
             state.reputation >= project.reputationCost;
 
           return (
-            <article key={project.id} className={!unlocked ? "locked-card" : undefined}>
+            <article
+              key={project.id}
+              className={
+                completed
+                  ? "completed-card"
+                  : !unlocked
+                    ? "locked-card"
+                    : undefined
+              }
+            >
               <h3>
                 {completed ? "Shipped: " : ""}
                 {project.name}
