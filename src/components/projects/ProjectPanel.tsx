@@ -54,6 +54,16 @@ export function ProjectPanel({ state, onShipProject }: ProjectPanelProps) {
               </p>
 
               <p>
+                <strong>Your progress:</strong>{" "}
+                {formatNumber(Math.min(state.linesOfCode, project.locCost))} /{" "}
+                {formatNumber(project.locCost)} LOC,{" "}
+                {formatNumber(
+                  Math.min(state.reputation, project.reputationCost),
+                )}{" "}
+                / {formatNumber(project.reputationCost)} reputation
+              </p>
+
+              <p>
                 <strong>Reward:</strong> {project.rewardLabel}
               </p>
 
