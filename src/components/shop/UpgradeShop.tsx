@@ -2,7 +2,7 @@ import { upgrades } from "../../game/data/upgrades";
 import { getUpgradeCost } from "../../game/engine/formulas";
 import type { GameState, UpgradeId } from "../../game/state/types";
 import { UpgradeCard } from "./UpgradeCard";
-import { Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 
 type UpgradeShopProps = {
   state: GameState;
@@ -20,10 +20,11 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
         Ship projects to unlock more upgrades.
       </Typography>
 
-      <div className="upgrade-grid">
+      <Grid container spacing={1.5}>
         {upgrades.map((upgrade) => {
           const level = state.upgrades[upgrade.id];
           const cost = getUpgradeCost(upgrade, level);
+
           const unlocked =
             upgrade.requiredProjectIds?.every((projectId) =>
               state.completedProjects.includes(projectId),
@@ -32,18 +33,19 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
           if (!unlocked) return null;
 
           return (
-            <UpgradeCard
-              key={upgrade.id}
-              upgrade={upgrade}
-              level={level}
-              cost={cost}
-              canAfford={state.linesOfCode >= cost}
-              locked={false}
-              onBuy={onBuyUpgrade}
-            />
+            <Grid key={upgrade.id} size={{ xs: 12, sm: 6, md: 4 }}>
+              <UpgradeCard
+                upgrade={upgrade}
+                level={level}
+                cost={cost}
+                canAfford={state.linesOfCode >= cost}
+                locked={false}
+                onBuy={onBuyUpgrade}
+              />
+            </Grid>
           );
         })}
-      </div>
+      </Grid>
     </Paper>
   );
 }
