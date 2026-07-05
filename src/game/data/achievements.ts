@@ -48,6 +48,16 @@ export const achievements: Achievement[] = [
     },
   },
   {
+    id: "fiftyBugsFixed",
+    name: "Production Firefighter",
+    description: "Fix 50 bugs.",
+    bonusLabel: "+3 reputation / bug",
+    isUnlocked: (state) => state.totalBugsFixed >= 50,
+    modifiers: {
+      reputationPerBug: 3,
+    },
+  },
+  {
     id: "firstProject",
     name: "Shipped It",
     description: "Ship your first project.",
