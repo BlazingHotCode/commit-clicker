@@ -103,6 +103,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return project.applyReward(nextState);
     }
 
+    case "PRESTIGE": {
+      const earnedPrestigePoints = Math.floor(state.totalLinesOfCode / 100_000);
+
+      if (earnedPrestigePoints <= 0) return state;
+
+      return {
+        ...initialState,
+        prestigePoints: state.prestigePoints + earnedPrestigePoints,
+        lastSavedAt: Date.now(),
+      };
+    }
+
     case "TICK": {
       return applyTick(state, action.deltaSeconds);
     }
