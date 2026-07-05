@@ -17,6 +17,10 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
         {upgrades.map((upgrade) => {
           const level = state.upgrades[upgrade.id];
           const cost = getUpgradeCost(upgrade, level);
+          const unlocked =
+            upgrade.requiredProjectIds?.every((projectId) =>
+              state.completedProjects.includes(projectId),
+            ) ?? true;
 
           return (
             <UpgradeCard
@@ -25,6 +29,7 @@ export function UpgradeShop({ state, onBuyUpgrade }: UpgradeShopProps) {
               level={level}
               cost={cost}
               canAfford={state.linesOfCode >= cost}
+              locked={!unlocked}
               onBuy={onBuyUpgrade}
             />
           );

@@ -7,6 +7,7 @@ export type Upgrade = {
   effectLabel: string;
   baseCost: number;
   costMultiplier: number;
+  requiredProjectIds?: string[];
   apply: (state: GameState) => GameState;
 };
 
@@ -42,6 +43,7 @@ export const upgrades: Upgrade[] = [
     effectLabel: "+1 LOC / second",
     baseCost: 100,
     costMultiplier: 1.5,
+    requiredProjectIds: ["personalWebsite"],
     apply: (state) => ({
       ...state,
       locPerSecond: state.locPerSecond + 1,
@@ -54,6 +56,7 @@ export const upgrades: Upgrade[] = [
     effectLabel: "-1% bug chance",
     baseCost: 150,
     costMultiplier: 1.6,
+    requiredProjectIds: ["todoApp"],
     apply: (state) => ({
       ...state,
       bugChance: Math.max(0.01, state.bugChance - 0.01),
@@ -66,6 +69,7 @@ export const upgrades: Upgrade[] = [
     effectLabel: "+1 reputation / bug",
     baseCost: 200,
     costMultiplier: 1.55,
+    requiredProjectIds: ["bugTracker"],
     apply: (state) => ({
       ...state,
       reputationPerBug: state.reputationPerBug + 1,

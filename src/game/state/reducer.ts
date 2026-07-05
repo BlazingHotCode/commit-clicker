@@ -38,6 +38,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const upgrade = upgrades.find((item) => item.id === action.upgradeId);
       if (!upgrade) return state;
 
+      const unlocked =
+        upgrade.requiredProjectIds?.every((projectId) =>
+          state.completedProjects.includes(projectId),
+        ) ?? true;
+
+      if (!unlocked) return state;
+
       const currentLevel = state.upgrades[action.upgradeId];
       const cost = getUpgradeCost(upgrade, currentLevel);
 

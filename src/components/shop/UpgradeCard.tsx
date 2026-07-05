@@ -7,6 +7,7 @@ type UpgradeCardProps = {
   level: number;
   cost: number;
   canAfford: boolean;
+  locked: boolean;
   onBuy: (upgradeId: UpgradeId) => void;
 };
 
@@ -15,18 +16,30 @@ export function UpgradeCard({
   level,
   cost,
   canAfford,
+  locked,
   onBuy,
 }: UpgradeCardProps) {
   return (
-    <article>
+    <article className={locked ? "locked-card" : undefined}>
       <h3>{upgrade.name}</h3>
       <p>{upgrade.description}</p>
-      <p><strong>Effect:</strong> {upgrade.effectLabel}</p>
-      <p><strong>Level:</strong> {level}</p>
-      <p><strong>Cost:</strong> {formatNumber(cost)} LOC</p>
+      {locked && (
+        <p>
+          <strong>Locked:</strong> Ship more projects to unlock this upgrade.
+        </p>
+      )}
+      <p>
+        <strong>Effect:</strong> {upgrade.effectLabel}
+      </p>
+      <p>
+        <strong>Level:</strong> {level}
+      </p>
+      <p>
+        <strong>Cost:</strong> {formatNumber(cost)} LOC
+      </p>
 
       <button disabled={!canAfford} onClick={() => onBuy(upgrade.id)}>
-        Buy
+        {locked ? "Locked" : "Buy"}
       </button>
     </article>
   );
