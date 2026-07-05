@@ -1,5 +1,6 @@
 import { initialState } from "../state/initialState";
 import type { GameState } from "../state/types";
+import { createSaveState } from "./createSaveState";
 import { getEffectiveStats } from "./stats";
 
 const SAVE_KEY = "commit-clicker-save";
@@ -24,15 +25,12 @@ export function loadGame(): GameState {
 
     if (!saved) return initialState;
 
-    const parsed = {
-      ...initialState,
-      ...JSON.parse(saved),
-    };
+    const parsed = createSaveState(JSON.parse(saved));
 
     const now = Date.now();
     const secondsAway = Math.floor((now - parsed.lastSavedAt) / 1000);
     const cappedSecondsAway = Math.min(secondsAway, 60 * 60 * 8);
-    const stats = getEffectiveStats(parsed)
+    const stats = getEffectiveStats(parsed);
     const offlineLoc = stats.locPerSecond * cappedSecondsAway;
 
     return {
