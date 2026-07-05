@@ -4,7 +4,8 @@ export type UpgradeId =
   | "juniorDev"
   | "unitTests"
   | "debugger"
-  | "seniorDev";
+  | "seniorDev"
+  | "techLead";
 
 export type GameState = {
   linesOfCode: number;

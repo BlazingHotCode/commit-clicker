@@ -88,4 +88,17 @@ export const upgrades: Upgrade[] = [
       locPerSecond: state.locPerSecond + 10,
     }),
   },
+  {
+    id: "techLead",
+    name: "Tech Lead",
+    description: "+50 LOC per second",
+    effectLabel: "+50 LOC / second",
+    baseCost: 25_000,
+    costMultiplier: 1.8,
+    requiredProjectIds: ["saasDashboard"],
+    apply: (state) => ({
+      ...state,
+      locPerSecond: state.locPerSecond + 50,
+    }),
+  },
 ];
