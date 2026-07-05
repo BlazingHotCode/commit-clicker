@@ -3,9 +3,12 @@ import "./App.css";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
+import { useGameLoop } from "./hooks/useGameLoop";
 
 function App() {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+
+  useGameLoop(dispatch);
 
   return (
     <main>

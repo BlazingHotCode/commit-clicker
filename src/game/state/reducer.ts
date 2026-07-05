@@ -84,7 +84,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "TICK": {
-      const gained = state.locPerSecond + action.deltaSeconds;
+      const gained = state.locPerSecond * action.deltaSeconds;
 
       return {
         ...state,
