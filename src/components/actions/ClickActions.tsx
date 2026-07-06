@@ -51,14 +51,14 @@ export function ClickActions({
           size="large"
           fullWidth
           onClick={onRefactorCode}
-          disabled={bugs <= 0 || reputation < 5}
+          disabled={reputation < 5}
           sx={{ py: { xs: 1.5, sm: 1 } }}
         >
           Refactor Code
         </Button>
       </Stack>
       <Typography color="text.secondary" sx={{ mt: 2 }}>
-        Refactor Code costs 5 reputation and removes up to 3 bugs.
+        Refactor Code costs 5 reputation and adds +1 LOC per fixed bug.
       </Typography>
     </Paper>
   );
