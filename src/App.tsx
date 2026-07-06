@@ -91,8 +91,9 @@ function App() {
         <ClickActions
           bugs={state.bugs}
           reputation={state.reputation}
+          hasActiveBugChallenge={state.activeBugChallenge !== null}
           onWriteCode={() => dispatch({ type: "WRITE_CODE" })}
-          onFixBug={() => dispatch({ type: "FIX_BUG" })}
+          onStartBugChallenge={() => dispatch({ type: "START_BUG_CHALLENGE" })}
           onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
         />
       </Box>

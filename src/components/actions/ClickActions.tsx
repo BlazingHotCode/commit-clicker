@@ -3,16 +3,18 @@ import { Button, Paper, Stack, Typography } from "@mui/material";
 type ClickActionsProps = {
   bugs: number;
   reputation: number;
+  hasActiveBugChallenge: boolean;
   onWriteCode: () => void;
-  onFixBug: () => void;
+  onStartBugChallenge: () => void;
   onRefactorCode: () => void;
 };
 
 export function ClickActions({
   bugs,
   reputation,
+  hasActiveBugChallenge,
   onWriteCode,
-  onFixBug,
+  onStartBugChallenge,
   onRefactorCode,
 }: ClickActionsProps) {
   return (
@@ -36,11 +38,11 @@ export function ClickActions({
           variant="outlined"
           size="large"
           fullWidth
-          onClick={onFixBug}
-          disabled={bugs <= 0}
+          onClick={onStartBugChallenge}
+          disabled={bugs <= 0 || hasActiveBugChallenge}
           sx={{ py: { xs: 1.5, sm: 1 } }}
         >
-          Fix Bug
+          Debug Bug
         </Button>
 
         <Button
