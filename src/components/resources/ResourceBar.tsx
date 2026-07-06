@@ -105,6 +105,16 @@ export function ResourceBar({ state }: ResourceBarProps) {
           sx={{ display: { xs: "none", sm: "block" } }}
         >
           <ResourceItem
+            label="LOC per bug fixed"
+            value={formatNumber(state.locPerBugFixed)}
+          />
+        </Grid>
+
+        <Grid
+          size={{ xs: 6, sm: 6, md: 3 }}
+          sx={{ display: { xs: "none", sm: "block" } }}
+        >
+          <ResourceItem
             label="Total LOC"
             value={formatNumber(state.totalLinesOfCode)}
           />

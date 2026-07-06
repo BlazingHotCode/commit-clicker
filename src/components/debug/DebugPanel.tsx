@@ -304,6 +304,9 @@ export function DebugPanel({ state, dispatch }: DebugPanelProps) {
               <Typography>
                 Effective bug chance: {Math.round(stats.bugChance * 100)}%
               </Typography>
+              <Typography sx={{ mt: 2 }}>
+                LOC per bug fixed: {formatNumber(state.locPerBugFixed)}
+              </Typography>
             </CardContent>
           </Card>
         </Grid>
