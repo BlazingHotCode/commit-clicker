@@ -5,23 +5,37 @@ import { getEffectiveStats } from "../engine/stats";
 import { applyTick } from "../engine/tick";
 import type { GameAction } from "./actions";
 import { initialState } from "./initialState";
-import type { GameState } from "./types";
+import type { BugChallenge, GameState } from "./types";
 
-const bugChallengeOptions = [
-  "Null reference",
-  "Off-by-one error",
-  "Race condition",
-  "Missing dependency",
+const bugChallenges: BugChallenge[] = [
+  {
+    symptom: "The app crashes when a value is missing.",
+    options: [
+      { label: "Add a null check", result: "correct" },
+      { label: "Rename the variable", result: "wrong" },
+      { label: "Disable the whole feature", result: "bad" },
+    ],
+  },
+  {
+    symptom: "A list skips the final item.",
+    options: [
+      { label: "Check the loop boundary", result: "correct" },
+      { label: "Change the item color", result: "wrong" },
+      { label: "Delete the list rendering code", result: "bad" },
+    ],
+  },
+  {
+    symptom: "Data sometimes saves twice.",
+    options: [
+      { label: "Check repeated event handlers", result: "correct" },
+      { label: "Increase the button size", result: "wrong" },
+      { label: "Save on every render", result: "bad" },
+    ],
+  },
 ];
 
 function createBugChallenge() {
-  const correctAnswer =
-    bugChallengeOptions[Math.floor(Math.random() * bugChallengeOptions.length)];
-
-  return {
-    correctAnswer,
-    options: bugChallengeOptions,
-  };
+  return bugChallenges[Math.floor(Math.random() * bugChallenges.length)];
 }
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
@@ -52,9 +66,20 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case "ANSWER_BUG_CHALLENGE": {
       if (!state.activeBugChallenge) return state;
 
-      const correct = action.answer === state.activeBugChallenge.correctAnswer;
+      const selectedOption = state.activeBugChallenge.options.find(
+        (option) => option.label === action.answer,
+      );
 
-      if (!correct) {
+      if (!selectedOption) return state;
+
+      if (selectedOption.result === "wrong") {
+        return {
+          ...state,
+          activeBugChallenge: null,
+        };
+      }
+
+      if (selectedOption.result === "bad") {
         return {
           ...state,
           bugs: state.bugs + 1,

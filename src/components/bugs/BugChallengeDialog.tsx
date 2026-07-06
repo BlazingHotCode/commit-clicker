@@ -30,11 +30,11 @@ export function BugChallengeDialog({
         <Stack spacing={1.5}>
           {challenge?.options.map((option) => (
             <Button
-              key={option}
+              key={option.label}
               variant="outlined"
-              onClick={() => onAnswer(option)}
+              onClick={() => onAnswer(option.label)}
             >
-              {option}
+              {option.label}
             </Button>
           ))}
         </Stack>
@@ -42,7 +42,7 @@ export function BugChallengeDialog({
 
       <DialogActions>
         <DialogContentText sx={{ px: 2, pb: 1 }}>
-          Wrong answers create another bug.
+          Wrong fixes waste time. Dangerous fixes create another bug.
         </DialogContentText>
       </DialogActions>
     </Dialog>

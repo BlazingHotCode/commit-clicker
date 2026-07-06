@@ -8,9 +8,14 @@ export type UpgradeId =
   | "techLead"
   | "aiCodeAssistant";
 
+export type BugChallengeOption = {
+  label: string;
+  result: "correct" | "wrong" | "bad";
+};
+
 export type BugChallenge = {
-  correctAnswer: string;
-  options: string[];
+  symptom: string;
+  options: BugChallengeOption[];
 };
 
 export type GameState = {
