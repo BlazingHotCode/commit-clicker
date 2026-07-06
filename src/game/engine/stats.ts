@@ -10,14 +10,11 @@ export function getEffectiveStats(state: GameState) {
   const prestigeMultiplier = 1 + state.prestigePoints * 0.05;
 
   for (const achievement of achievements) {
-    if (!achievement.isUnlocked(state)) continue;
+    if (!state.claimedAchievements.includes(achievement.id)) continue;
 
     locPerClick += achievement.modifiers.locPerClick ?? 0;
-
     locPerSecond += achievement.modifiers.locPerSecond ?? 0;
-
     reputationPerBug += achievement.modifiers.reputationPerBug ?? 0;
-
     bugChance += achievement.modifiers.bugChance ?? 0;
   }
 

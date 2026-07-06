@@ -22,20 +22,25 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
 
       <Grid container spacing={1.5}>
         {achievements.map((achievement) => {
-          const unlocked = achievement.isUnlocked(state);
+          const claimed = state.claimedAchievements.includes(achievement.id);
+          const claimable = !claimed && achievement.canClaim(state);
 
           return (
             <Grid key={achievement.id} size={{ xs: 12, sm: 6, md: 4 }}>
               <Card
                 variant="outlined"
-                className={unlocked ? "completed-card" : "locked-card"}
+                className={claimed ? "completed-card" : "locked-card"}
               >
                 <CardContent>
                   <Typography variant="h6" component="h3">
                     <Chip
                       size="small"
-                      color={unlocked ? "success" : "error"}
-                      label={unlocked ? "Earned" : "Locked"}
+                      color={
+                        claimed ? "success" : claimable ? "warning" : "error"
+                      }
+                      label={
+                        claimed ? "Claimed" : claimable ? "Ready" : "Locked"
+                      }
                       sx={{ mr: 1 }}
                     />
                     {achievement.name}
@@ -46,7 +51,7 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
                   </Typography>
 
                   <Typography sx={{ mt: 1 }}>
-                    <strong>Bonus:</strong> {achievement.bonusLabel}
+                    <strong>Reward:</strong> {achievement.rewardLabel}
                   </Typography>
                 </CardContent>
               </Card>
