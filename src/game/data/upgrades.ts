@@ -52,14 +52,14 @@ export const upgrades: Upgrade[] = [
   {
     id: "unitTests",
     name: "Unit Tests",
-    description: "Reduces bug chance",
-    effectLabel: "-1% bug chance",
+    description: "Makes each fixed bug worth more reputation",
+    effectLabel: "+1 reputation / bug",
     baseCost: 150,
     costMultiplier: 1.6,
     requiredProjectIds: ["todoApp"],
     apply: (state) => ({
       ...state,
-      bugChance: Math.max(0.01, state.bugChance - 0.01),
+      reputationPerBug: state.reputationPerBug + 1,
     }),
   },
   {
