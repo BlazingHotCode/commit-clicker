@@ -127,6 +127,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         totalLinesOfCode: state.totalLinesOfCode + state.locPerBugFixed,
         reputation: state.reputation + stats.reputationPerBug,
         totalBugsFixed: state.totalBugsFixed + 1,
+        lifetimeBugsFixed: state.lifetimeBugsFixed + 1,
         activeBugChallenge: null,
         bugChallengeResult: "correct",
       };
@@ -200,6 +201,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         linesOfCode: state.linesOfCode - project.locCost,
         reputation: state.reputation - project.reputationCost,
         completedProjects: [...state.completedProjects, project.id],
+        lifetimeProjectsShipped: state.lifetimeProjectsShipped + 1,
       };
 
       return project.applyReward(nextState);
@@ -213,6 +215,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...initialState,
         prestigePoints: state.prestigePoints + earnedPrestigePoints,
+        claimedAchievements: state.claimedAchievements,
+        lifetimeBugsFixed: state.lifetimeBugsFixed,
+        lifetimeProjectsShipped: state.lifetimeProjectsShipped,
+        lifetimePrestiges: state.lifetimePrestiges + 1,
         lastSavedAt: Date.now(),
       };
     }

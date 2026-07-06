@@ -44,7 +44,11 @@ export type GameState = {
 
   unlockedMilestones: string[];
 
-  unlockedAchievements: string[];
+  claimedAchievements: string[];
+
+  lifetimeBugsFixed: number;
+  lifetimeProjectsShipped: number;
+  lifetimePrestiges: number;
 
   completedProjects: string[];
 };

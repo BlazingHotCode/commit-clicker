@@ -35,7 +35,11 @@ export const initialState: GameState = {
 
   unlockedMilestones: [],
 
-  unlockedAchievements: [],
+  claimedAchievements: [],
+
+  lifetimeBugsFixed: 0,
+  lifetimeProjectsShipped: 0,
+  lifetimePrestiges: 0,
 
   completedProjects: [],
 };
