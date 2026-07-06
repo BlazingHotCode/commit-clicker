@@ -24,6 +24,7 @@ export type GameState = {
   locPerSecond: number;
   bugChance: number;
   reputationPerBug: number;
+  locPerBugFixed: number;
 
   lastSavedAt: number;
 

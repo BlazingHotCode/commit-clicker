@@ -28,6 +28,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         bugs: state.bugs - 1,
+        linesOfCode: state.linesOfCode + state.locPerBugFixed,
+        totalLinesOfCode: state.totalLinesOfCode + state.locPerBugFixed,
         reputation:
           state.reputation + getEffectiveStats(state).reputationPerBug,
         totalBugsFixed: state.totalBugsFixed + 1,

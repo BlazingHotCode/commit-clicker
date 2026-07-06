@@ -16,6 +16,7 @@ export const initialState: GameState = {
   locPerSecond: 0,
   bugChance: 0.1,
   reputationPerBug: 1,
+  locPerBugFixed: 0,
 
   lastSavedAt: Date.now(),
 

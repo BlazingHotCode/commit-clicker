@@ -52,15 +52,14 @@ export const upgrades: Upgrade[] = [
   {
     id: "unitTests",
     name: "Unit Tests",
-    description: "Improves your coding consistency",
-    effectLabel: "+0.5 LOC / click, +0.5 LOC / second",
+    description: "Fixing bugs also recovers useful code",
+    effectLabel: "+5 LOC when fixing a bug",
     baseCost: 150,
     costMultiplier: 1.6,
     requiredProjectIds: ["todoApp"],
     apply: (state) => ({
       ...state,
-      locPerClick: state.locPerClick + 0.5,
-      locPerSecond: state.locPerSecond + 0.5,
+      locPerBugFixed: state.locPerBugFixed + 5,
     }),
   },
   {

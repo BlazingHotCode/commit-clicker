@@ -7,6 +7,7 @@ export function createSaveState(saved: Partial<GameState>): GameState {
     ...saved,
     offlineLocGained: saved.offlineLocGained ?? 0,
     prestigePoints: saved.prestigePoints ?? 0,
+    locPerBugFixed: saved.locPerBugFixed ?? 0,
     upgrades: {
       ...initialState.upgrades,
       ...saved.upgrades,
