@@ -5,6 +5,7 @@ export function createSaveState(saved: Partial<GameState>): GameState {
   return {
     ...initialState,
     ...saved,
+    activeBugChallenge: saved.activeBugChallenge ?? null,
     offlineLocGained: saved.offlineLocGained ?? 0,
     prestigePoints: saved.prestigePoints ?? 0,
     locPerBugFixed: saved.locPerBugFixed ?? 0,

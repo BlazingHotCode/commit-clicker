@@ -3,6 +3,7 @@ import type { GameState } from "./types";
 export const initialState: GameState = {
   linesOfCode: 0,
   bugs: 0,
+  activeBugChallenge: null,
   reputation: 0,
 
   offlineLocGained: 0,

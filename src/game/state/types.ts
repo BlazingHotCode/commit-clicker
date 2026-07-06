@@ -8,9 +8,15 @@ export type UpgradeId =
   | "techLead"
   | "aiCodeAssistant";
 
+export type BugChallenge = {
+  correctAnswer: string;
+  options: string[];
+};
+
 export type GameState = {
   linesOfCode: number;
   bugs: number;
+  activeBugChallenge: BugChallenge | null;
   reputation: number;
 
   offlineLocGained: number;
