@@ -6,6 +6,7 @@ export type GameAction =
   | { type: "START_BUG_CHALLENGE" }
   | { type: "ANSWER_BUG_CHALLENGE"; answer: string }
   | { type: "CLEAR_BUG_CHALLENGE_RESULT" }
+  | { type: "CLAIM_ACHIEVEMENT"; achievementId: string }
   | { type: "BUY_UPGRADE"; upgradeId: UpgradeId }
   | { type: "SHIP_PROJECT"; projectId: string }
   | { type: "PRESTIGE" }

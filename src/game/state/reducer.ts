@@ -6,6 +6,7 @@ import { applyTick } from "../engine/tick";
 import type { GameAction } from "./actions";
 import { initialState } from "./initialState";
 import type { BugChallenge, GameState } from "./types";
+import { achievements } from "../data/achievements";
 
 const bugChallenges: BugChallenge[] = [
   {
@@ -148,6 +149,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...state,
         reputation: state.reputation - reputationCost,
         locPerBugFixed: state.locPerBugFixed + 1,
+      };
+    }
+
+    case "CLAIM_ACHIEVEMENT": {
+      const achievement = achievements.find(
+        (achievement) => achievement.id === action.achievementId,
+      );
+
+      if (!achievement) return state;
+      if (state.claimedAchievements.includes(achievement.id)) return state;
+      if (!achievement.canClaim(state)) return state;
+
+      return {
+        ...state,
+        claimedAchievements: [...state.claimedAchievements, achievement.id],
       };
     }
 
