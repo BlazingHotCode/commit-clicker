@@ -21,20 +21,36 @@ export function ClickActions({
         Actions
       </Typography>
 
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-        <Button variant="contained" onClick={onWriteCode}>
+      <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+        <Button
+          variant="contained"
+          size="large"
+          fullWidth
+          onClick={onWriteCode}
+          sx={{ py: { xs: 1.5, sm: 1 } }}
+        >
           Write Code
         </Button>
 
-        <Button variant="outlined" onClick={onFixBug} disabled={bugs <= 0}>
+        <Button
+          variant="outlined"
+          size="large"
+          fullWidth
+          onClick={onFixBug}
+          disabled={bugs <= 0}
+          sx={{ py: { xs: 1.5, sm: 1 } }}
+        >
           Fix Bug
         </Button>
 
         <Button
           variant="outlined"
           color="secondary"
+          size="large"
+          fullWidth
           onClick={onRefactorCode}
           disabled={bugs <= 0 || reputation < 5}
+          sx={{ py: { xs: 1.5, sm: 1 } }}
         >
           Refactor Code
         </Button>
