@@ -9,27 +9,55 @@ import type { BugChallenge, GameState } from "./types";
 
 const bugChallenges: BugChallenge[] = [
   {
-    symptom: "The app crashes when a value is missing.",
+    symptom: "The app crashes only when a saved value is missing.",
     options: [
-      { label: "Add a null check", result: "correct" },
-      { label: "Rename the variable", result: "wrong" },
-      { label: "Disable the whole feature", result: "bad" },
+      {
+        label: "Add a fallback before reading the saved value",
+        result: "correct",
+      },
+      { label: "Rename the save key", result: "wrong" },
+      { label: "Delete the save loading code", result: "bad" },
     ],
   },
   {
-    symptom: "A list skips the final item.",
+    symptom: "A list shows every item except the last one.",
     options: [
-      { label: "Check the loop boundary", result: "correct" },
-      { label: "Change the item color", result: "wrong" },
-      { label: "Delete the list rendering code", result: "bad" },
+      {
+        label: "Check the loop boundary or slice end index",
+        result: "correct",
+      },
+      { label: "Increase the font size", result: "wrong" },
+      { label: "Skip rendering the list", result: "bad" },
     ],
   },
   {
-    symptom: "Data sometimes saves twice.",
+    symptom: "Clicking once sometimes submits the same action twice.",
     options: [
-      { label: "Check repeated event handlers", result: "correct" },
-      { label: "Increase the button size", result: "wrong" },
-      { label: "Save on every render", result: "bad" },
+      { label: "Check for duplicate event handlers", result: "correct" },
+      { label: "Change the button color", result: "wrong" },
+      { label: "Run the action on every render", result: "bad" },
+    ],
+  },
+  {
+    symptom: "Numbers slowly drift into decimals when they should stay whole.",
+    options: [
+      {
+        label: "Round only display values, not the stored state",
+        result: "correct",
+      },
+      { label: "Convert every number to text", result: "wrong" },
+      { label: "Store all values as random integers", result: "bad" },
+    ],
+  },
+  {
+    symptom: "A UI panel is empty on mobile but works on desktop.",
+    options: [
+      {
+        label: "Check responsive display rules and selected mobile tab",
+        result: "correct",
+      },
+      { label: "Increase the desktop max width", result: "wrong" },
+      { label: "Hide all panels on small screens", result: "bad" },
     ],
   },
 ];
