@@ -4,6 +4,7 @@ export const initialState: GameState = {
   linesOfCode: 0,
   bugs: 0,
   activeBugChallenge: null,
+  bugChallengeResult: null,
   reputation: 0,
 
   offlineLocGained: 0,

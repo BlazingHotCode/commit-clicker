@@ -60,6 +60,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         activeBugChallenge: createBugChallenge(),
+        bugChallengeResult: null,
       };
     }
 
@@ -76,6 +77,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         return {
           ...state,
           activeBugChallenge: null,
+          bugChallengeResult: "wrong",
         };
       }
 
@@ -84,6 +86,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
           ...state,
           bugs: state.bugs + 1,
           activeBugChallenge: null,
+          bugChallengeResult: "bad",
         };
       }
 
@@ -97,8 +100,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         reputation: state.reputation + stats.reputationPerBug,
         totalBugsFixed: state.totalBugsFixed + 1,
         activeBugChallenge: null,
+        bugChallengeResult: "correct",
       };
     }
+
+    case "CLEAR_BUG_CHALLENGE_RESULT":
+      return {
+        ...state,
+        bugChallengeResult: null,
+      };
 
     case "FIX_BUG": {
       if (state.bugs <= 0) return state;

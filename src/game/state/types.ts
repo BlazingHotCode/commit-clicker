@@ -22,6 +22,7 @@ export type GameState = {
   linesOfCode: number;
   bugs: number;
   activeBugChallenge: BugChallenge | null;
+  bugChallengeResult: "correct" | "wrong" | "bad" | null;
   reputation: number;
 
   offlineLocGained: number;

@@ -52,6 +52,22 @@ function App() {
     <SettingsPanel onResetSave={() => setResetDialogOpen(true)} />
   );
 
+  const bugResultMessage =
+    state.bugChallengeResult === "correct"
+      ? "Bug fixed. Reputation gained."
+      : state.bugChallengeResult === "wrong"
+        ? "That fix did not work. Try debugging the bug again."
+        : state.bugChallengeResult === "bad"
+          ? "That made things worse and created another bug."
+          : "";
+
+  const bugResultSeverity =
+    state.bugChallengeResult === "correct"
+      ? "success"
+      : state.bugChallengeResult === "wrong"
+        ? "warning"
+        : "error";
+
   useEffect(() => {
     if (state.offlineLocGained <= 0) return;
 
@@ -78,6 +94,21 @@ function App() {
         >
           Welcome back! You gained {formatNumber(state.offlineLocGained)} LOC
           while you were away.
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={state.bugChallengeResult !== null}
+        autoHideDuration={3500}
+        onClose={() => dispatch({ type: "CLEAR_BUG_CHALLENGE_RESULT" })}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          severity={bugResultSeverity}
+          variant="filled"
+          onClose={() => dispatch({ type: "CLEAR_BUG_CHALLENGE_RESULT" })}
+        >
+          {bugResultMessage}
         </Alert>
       </Snackbar>
 
