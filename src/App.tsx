@@ -34,6 +34,7 @@ import { PrestigePanel } from "./components/prestige/PrestigePanel";
 import { formatNumber } from "./game/utils/formatNumber";
 import { MobileNav, type MobilePanel } from "./components/navigation/MobileNav";
 import { SettingsPanel } from "./components/settings/SettingsPanel";
+import { BugChallengeDialog } from "./components/bugs/BugChallengeDialog";
 
 const DEBUG_TOOLS_ENABLED = false;
 
@@ -236,6 +237,13 @@ function App() {
           </Paper>
         </Box>
       </Box>
+
+      <BugChallengeDialog
+        challenge={state.activeBugChallenge}
+        onAnswer={(answer) =>
+          dispatch({ type: "ANSWER_BUG_CHALLENGE", answer })
+        }
+      />
 
       <Dialog open={resetDialogOpen} onClose={() => setResetDialogOpen(false)}>
         <DialogTitle>Reset save?</DialogTitle>
