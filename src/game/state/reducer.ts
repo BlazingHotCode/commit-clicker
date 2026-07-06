@@ -110,20 +110,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         bugChallengeResult: null,
       };
 
-    case "FIX_BUG": {
-      if (state.bugs <= 0) return state;
-
-      return {
-        ...state,
-        bugs: state.bugs - 1,
-        linesOfCode: state.linesOfCode + state.locPerBugFixed,
-        totalLinesOfCode: state.totalLinesOfCode + state.locPerBugFixed,
-        reputation:
-          state.reputation + getEffectiveStats(state).reputationPerBug,
-        totalBugsFixed: state.totalBugsFixed + 1,
-      };
-    }
-
     case "REFACTOR_CODE": {
       const reputationCost = 5;
       const bugsRemoved = 3;

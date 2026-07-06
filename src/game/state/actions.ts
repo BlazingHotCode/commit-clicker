@@ -2,7 +2,6 @@ import type { GameState, UpgradeId } from "./types";
 
 export type GameAction =
   | { type: "WRITE_CODE" }
-  | { type: "FIX_BUG" }
   | { type: "REFACTOR_CODE" }
   | { type: "START_BUG_CHALLENGE" }
   | { type: "ANSWER_BUG_CHALLENGE"; answer: string }
