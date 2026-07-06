@@ -6,6 +6,7 @@ import {
   DialogContentText,
   DialogTitle,
   Stack,
+  Typography,
 } from "@mui/material";
 import type { BugChallenge } from "../../game/state/types";
 
@@ -24,8 +25,12 @@ export function BugChallengeDialog({
 
       <DialogContent>
         <DialogContentText sx={{ mb: 2 }}>
-          A bug appeared. Pick the most likely cause.
+          A bug appeared. Pick the best fix.
         </DialogContentText>
+
+        <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 700 }}>
+          {challenge?.symptom}
+        </Typography>
 
         <Stack spacing={1.5}>
           {challenge?.options.map((option) => (
