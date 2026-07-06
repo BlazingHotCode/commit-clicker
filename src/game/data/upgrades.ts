@@ -104,8 +104,8 @@ export const upgrades: Upgrade[] = [
   {
     id: "aiCodeAssistant",
     name: "AI Code Assistant",
-    description: "+100 LOC per click, +100 LOC per second",
-    effectLabel: "+100 LOC / click, +100 LOC / second",
+    description: "+100 LOC per click, +100 LOC per second, but +10% bug chance",
+    effectLabel: "+100 LOC / click, +100 LOC / second, +10% bug chance",
     baseCost: 100_000,
     costMultiplier: 2,
     requiredProjectIds: ["deploymentPlatform"],
@@ -113,6 +113,7 @@ export const upgrades: Upgrade[] = [
       ...state,
       locPerClick: state.locPerClick + 100,
       locPerSecond: state.locPerSecond + 100,
+      bugChance: state.bugChance + 0.1,
     }),
   },
 ];
