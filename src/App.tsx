@@ -1,5 +1,8 @@
 import { useEffect, useReducer, useState } from "react";
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Alert,
   Box,
   Button,
@@ -14,6 +17,7 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
@@ -43,6 +47,30 @@ function App() {
   const [mobilePanel, setMobilePanel] = useState<MobilePanel>("actions");
 
   const showMobilePanel = (panel: MobilePanel) => mobilePanel === panel;
+
+  const settingsPanel = (
+    <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
+      <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
+        Settings
+      </Typography>
+
+      <Card variant="outlined">
+        <CardContent>
+          <Typography color="text.secondary" sx={{ mb: 2 }}>
+            Commit Clicker v0.1 - Local autosave enabled
+          </Typography>
+
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => setResetDialogOpen(true)}
+          >
+            Reset Save
+          </Button>
+        </CardContent>
+      </Card>
+    </Paper>
+  );
 
   useEffect(() => {
     if (state.offlineLocGained <= 0) return;
@@ -146,7 +174,7 @@ function App() {
           },
         }}
       >
-        <Box sx={{ display: "grid", gap: 3 }}>
+        <Box sx={{ display: { xs: "none", md: "grid" }, gap: 3 }}>
           <MilestonePanel state={state} />
 
           <AchievementPanel state={state} />
@@ -160,65 +188,101 @@ function App() {
             onPrestige={() => dispatch({ type: "PRESTIGE" })}
           />
 
-          <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
+          {settingsPanel}
+        </Box>
+
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
+          <Paper component="section" variant="outlined" sx={{ p: 1.5 }}>
             <Typography
               variant="h5"
               component="h2"
               sx={{ mb: 2, fontWeight: 700 }}
             >
-              Settings
+              More
             </Typography>
 
-            <Card variant="outlined">
-              <CardContent>
-                <Typography color="text.secondary" sx={{ mb: 2 }}>
-                  Commit Clicker v0.1 - Local autosave enabled
-                </Typography>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Milestones</Typography>
+              </AccordionSummary>
 
-                <Button
-                  variant="outlined"
-                  color="error"
-                  onClick={() => setResetDialogOpen(true)}
-                >
-                  Reset Save
-                </Button>
-              </CardContent>
-            </Card>
+              <AccordionDetails>
+                <MilestonePanel state={state} />
+              </AccordionDetails>
+            </Accordion>
 
-            <Dialog
-              open={resetDialogOpen}
-              onClose={() => setResetDialogOpen(false)}
-            >
-              <DialogTitle>Reset save?</DialogTitle>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Achievements</Typography>
+              </AccordionSummary>
 
-              <DialogContent>
-                <DialogContentText>
-                  Resetting your save will permanently delete all progress,
-                  including prestige points. This cannot be undone.
-                </DialogContentText>
-              </DialogContent>
+              <AccordionDetails>
+                <AchievementPanel state={state} />
+              </AccordionDetails>
+            </Accordion>
 
-              <DialogActions>
-                <Button onClick={() => setResetDialogOpen(false)}>
-                  Cancel
-                </Button>
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Prestige</Typography>
+              </AccordionSummary>
 
-                <Button
-                  color="error"
-                  variant="contained"
-                  onClick={() => {
-                    setResetDialogOpen(false);
-                    clearSave();
-                    dispatch({ type: "RESET_GAME" });
-                  }}
-                >
-                  Reset Save
-                </Button>
-              </DialogActions>
-            </Dialog>
+              <AccordionDetails>
+                <PrestigePanel
+                  state={state}
+                  onPrestige={() => dispatch({ type: "PRESTIGE" })}
+                />
+              </AccordionDetails>
+            </Accordion>
+
+            {DEBUG_TOOLS_ENABLED && (
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>Debug</Typography>
+                </AccordionSummary>
+
+                <AccordionDetails>
+                  <DebugPanel state={state} dispatch={dispatch} />
+                </AccordionDetails>
+              </Accordion>
+            )}
+
+            <Accordion>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>Settings</Typography>
+              </AccordionSummary>
+
+              <AccordionDetails>{settingsPanel}</AccordionDetails>
+            </Accordion>
           </Paper>
         </Box>
       </Box>
+
+      <Dialog open={resetDialogOpen} onClose={() => setResetDialogOpen(false)}>
+        <DialogTitle>Reset save?</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Resetting your save will permanently delete all progress, including
+            prestige points. This cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={() => setResetDialogOpen(false)}>Cancel</Button>
+
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() => {
+              setResetDialogOpen(false);
+              clearSave();
+              dispatch({ type: "RESET_GAME" });
+            }}
+          >
+            Reset Save
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <MobileNav value={mobilePanel} onChange={setMobilePanel} />
     </GameLayout>
