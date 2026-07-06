@@ -54,11 +54,11 @@ function App() {
 
   const bugResultMessage =
     state.bugChallengeResult === "correct"
-      ? "Bug fixed. Reputation gained."
+      ? "Bug fixed. You gained reputation and recovered LOC."
       : state.bugChallengeResult === "wrong"
-        ? "That fix did not work. Try debugging the bug again."
+        ? "That fix did not work. The bug is still there."
         : state.bugChallengeResult === "bad"
-          ? "That made things worse and created another bug."
+          ? "That made things worse. You created another bug."
           : "";
 
   const bugResultSeverity =
