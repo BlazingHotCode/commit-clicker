@@ -1,6 +1,8 @@
 import {
   Alert,
+  Button,
   Card,
+  CardActions,
   CardContent,
   LinearProgress,
   Paper,
@@ -12,9 +14,10 @@ import { formatNumber } from "../../game/utils/formatNumber";
 
 type NextGoalPanelProps = {
   state: GameState;
+  onShipProject: (projectId: string) => void;
 };
 
-export function NextGoalPanel({ state }: NextGoalPanelProps) {
+export function NextGoalPanel({ state, onShipProject }: NextGoalPanelProps) {
   const nextProject = projects.find((project) => {
     const completed = state.completedProjects.includes(project.id);
     const unlocked =
@@ -97,6 +100,17 @@ export function NextGoalPanel({ state }: NextGoalPanelProps) {
             <strong>Reward:</strong> {nextProject.rewardLabel}
           </Typography>
         </CardContent>
+
+        <CardActions>
+          <Button
+            fullWidth
+            variant="contained"
+            disabled={locRemaining > 0 || reputationRemaining > 0}
+            onClick={() => onShipProject(nextProject.id)}
+          >
+            Ship Project
+          </Button>
+        </CardActions>
       </Card>
     </Paper>
   );

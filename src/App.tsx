@@ -76,7 +76,7 @@ function App() {
         onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
       />
 
-      <NextGoalPanel state={state} />
+      <NextGoalPanel state={state} onShipProject={(projectId) => dispatch({type: "SHIP_PROJECT", projectId})} />
 
       <UpgradeShop
         state={state}
