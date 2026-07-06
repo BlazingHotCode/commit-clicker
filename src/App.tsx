@@ -1,4 +1,19 @@
 import { useEffect, useReducer, useState } from "react";
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Paper,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import { gameReducer } from "./game/state/reducer";
 import { initialState } from "./game/state/initialState";
 import { UpgradeShop } from "./components/shop/UpgradeShop";
@@ -16,20 +31,6 @@ import { DebugPanel } from "./components/debug/DebugPanel";
 import { PrestigePanel } from "./components/prestige/PrestigePanel";
 import { formatNumber } from "./game/utils/formatNumber";
 import { MobileNav, type MobilePanel } from "./components/navigation/MobileNav";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  Snackbar,
-  Typography,
-} from "@mui/material";
 
 const DEBUG_TOOLS_ENABLED = false;
 
@@ -40,6 +41,8 @@ function App() {
   );
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
   const [mobilePanel, setMobilePanel] = useState<MobilePanel>("actions");
+
+  const showMobilePanel = (panel: MobilePanel) => mobilePanel === panel;
 
   useEffect(() => {
     if (state.offlineLocGained <= 0) return;
@@ -70,97 +73,152 @@ function App() {
         </Alert>
       </Snackbar>
 
-      <ClickActions
-        bugs={state.bugs}
-        reputation={state.reputation}
-        onWriteCode={() => dispatch({ type: "WRITE_CODE" })}
-        onFixBug={() => dispatch({ type: "FIX_BUG" })}
-        onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
-      />
+      <Box
+        sx={{
+          display: {
+            xs: showMobilePanel("actions") ? "block" : "none",
+            md: "block",
+          },
+        }}
+      >
+        <ClickActions
+          bugs={state.bugs}
+          reputation={state.reputation}
+          onWriteCode={() => dispatch({ type: "WRITE_CODE" })}
+          onFixBug={() => dispatch({ type: "FIX_BUG" })}
+          onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
+        />
+      </Box>
 
-      <NextGoalPanel
-        state={state}
-        onShipProject={(projectId) =>
-          dispatch({ type: "SHIP_PROJECT", projectId })
-        }
-      />
+      <Box
+        sx={{
+          display: {
+            xs: showMobilePanel("goal") ? "block" : "none",
+            md: "block",
+          },
+        }}
+      >
+        <NextGoalPanel
+          state={state}
+          onShipProject={(projectId) =>
+            dispatch({ type: "SHIP_PROJECT", projectId })
+          }
+        />
+      </Box>
 
-      <UpgradeShop
-        state={state}
-        onBuyUpgrade={(upgradeId) =>
-          dispatch({ type: "BUY_UPGRADE", upgradeId })
-        }
-      />
+      <Box
+        sx={{
+          display: {
+            xs: showMobilePanel("shop") ? "block" : "none",
+            md: "block",
+          },
+        }}
+      >
+        <UpgradeShop
+          state={state}
+          onBuyUpgrade={(upgradeId) =>
+            dispatch({ type: "BUY_UPGRADE", upgradeId })
+          }
+        />
+      </Box>
 
-      <ProjectPanel
-        state={state}
-        onShipProject={(projectId) =>
-          dispatch({ type: "SHIP_PROJECT", projectId })
-        }
-      />
+      <Box
+        sx={{
+          display: {
+            xs: showMobilePanel("projects") ? "block" : "none",
+            md: "block",
+          },
+        }}
+      >
+        <ProjectPanel
+          state={state}
+          onShipProject={(projectId) =>
+            dispatch({ type: "SHIP_PROJECT", projectId })
+          }
+        />
+      </Box>
 
-      <MilestonePanel state={state} />
+      <Box
+        sx={{
+          display: {
+            xs: showMobilePanel("more") ? "block" : "none",
+            md: "block",
+          },
+        }}
+      >
+        <Box sx={{ display: "grid", gap: 3 }}>
+          <MilestonePanel state={state} />
 
-      <AchievementPanel state={state} />
+          <AchievementPanel state={state} />
 
-      {DEBUG_TOOLS_ENABLED && <DebugPanel state={state} dispatch={dispatch} />}
+          {DEBUG_TOOLS_ENABLED && (
+            <DebugPanel state={state} dispatch={dispatch} />
+          )}
 
-      <PrestigePanel
-        state={state}
-        onPrestige={() => dispatch({ type: "PRESTIGE" })}
-      />
+          <PrestigePanel
+            state={state}
+            onPrestige={() => dispatch({ type: "PRESTIGE" })}
+          />
 
-      <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
-        <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
-          Settings
-        </Typography>
-
-        <Card variant="outlined">
-          <CardContent>
-            <Typography color="text.secondary" sx={{ mb: 2 }}>
-              Commit Clicker v0.1 - Local autosave enabled
+          <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
+            <Typography
+              variant="h5"
+              component="h2"
+              sx={{ mb: 2, fontWeight: 700 }}
+            >
+              Settings
             </Typography>
 
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={() => setResetDialogOpen(true)}
+            <Card variant="outlined">
+              <CardContent>
+                <Typography color="text.secondary" sx={{ mb: 2 }}>
+                  Commit Clicker v0.1 - Local autosave enabled
+                </Typography>
+
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => setResetDialogOpen(true)}
+                >
+                  Reset Save
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Dialog
+              open={resetDialogOpen}
+              onClose={() => setResetDialogOpen(false)}
             >
-              Reset Save
-            </Button>
-          </CardContent>
-        </Card>
+              <DialogTitle>Reset save?</DialogTitle>
 
-        <Dialog
-          open={resetDialogOpen}
-          onClose={() => setResetDialogOpen(false)}
-        >
-          <DialogTitle>Reset save?</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Resetting your save will permanently delete all progress,
+                  including prestige points. This cannot be undone.
+                </DialogContentText>
+              </DialogContent>
 
-          <DialogContent>
-            <DialogContentText>
-              Resetting your save will permanently delete all progress,
-              including prestige points. This cannot be undone.
-            </DialogContentText>
-          </DialogContent>
+              <DialogActions>
+                <Button onClick={() => setResetDialogOpen(false)}>
+                  Cancel
+                </Button>
 
-          <DialogActions>
-            <Button onClick={() => setResetDialogOpen(false)}>Cancel</Button>
-
-            <Button
-              color="error"
-              variant="contained"
-              onClick={() => {
-                setResetDialogOpen(false);
-                clearSave();
-                dispatch({ type: "RESET_GAME" });
-              }}
-            >
-              Reset Save
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Paper>
+                <Button
+                  color="error"
+                  variant="contained"
+                  onClick={() => {
+                    setResetDialogOpen(false);
+                    clearSave();
+                    dispatch({ type: "RESET_GAME" });
+                  }}
+                >
+                  Reset Save
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </Paper>
+        </Box>
+      </Box>
 
       <MobileNav value={mobilePanel} onChange={setMobilePanel} />
     </GameLayout>
