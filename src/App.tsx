@@ -15,6 +15,7 @@ import { NextGoalPanel } from "./components/goals/NextGoalPanel";
 import { DebugPanel } from "./components/debug/DebugPanel";
 import { PrestigePanel } from "./components/prestige/PrestigePanel";
 import { formatNumber } from "./game/utils/formatNumber";
+import { MobileNav, type MobilePanel } from "./components/navigation/MobileNav";
 import {
   Alert,
   Button,
@@ -38,6 +39,7 @@ function App() {
     state.offlineLocGained > 0,
   );
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+  const [mobilePanel, setMobilePanel] = useState<MobilePanel>("actions");
 
   useEffect(() => {
     if (state.offlineLocGained <= 0) return;
@@ -76,7 +78,12 @@ function App() {
         onRefactorCode={() => dispatch({ type: "REFACTOR_CODE" })}
       />
 
-      <NextGoalPanel state={state} onShipProject={(projectId) => dispatch({type: "SHIP_PROJECT", projectId})} />
+      <NextGoalPanel
+        state={state}
+        onShipProject={(projectId) =>
+          dispatch({ type: "SHIP_PROJECT", projectId })
+        }
+      />
 
       <UpgradeShop
         state={state}
@@ -154,6 +161,8 @@ function App() {
           </DialogActions>
         </Dialog>
       </Paper>
+
+      <MobileNav value={mobilePanel} onChange={setMobilePanel} />
     </GameLayout>
   );
 }

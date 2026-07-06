@@ -10,7 +10,8 @@ export function GameLayout({ children }: GameLayoutProps) {
       maxWidth="lg"
       sx={{
         px: { xs: 1.5, sm: 3 },
-        py: { xs: 2, sm: 4 },
+        pt: { xs: 2, sm: 4 },
+        pb: { xs: 10, md: 4 },
       }}
     >
       <Box component="header" sx={{ mb: 4 }}>
