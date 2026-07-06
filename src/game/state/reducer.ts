@@ -7,6 +7,23 @@ import type { GameAction } from "./actions";
 import { initialState } from "./initialState";
 import type { GameState } from "./types";
 
+const bugChallengeOptions = [
+  "Null reference",
+  "Off-by-one error",
+  "Race condition",
+  "Missing dependency",
+];
+
+function createBugChallenge() {
+  const correctAnswer =
+    bugChallengeOptions[Math.floor(Math.random() * bugChallengeOptions.length)];
+
+  return {
+    correctAnswer,
+    options: bugChallengeOptions,
+  };
+}
+
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "WRITE_CODE": {
@@ -19,6 +36,42 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         linesOfCode: state.linesOfCode + gained,
         totalLinesOfCode: state.totalLinesOfCode + gained,
         bugs: createBug ? state.bugs + 1 : state.bugs,
+      };
+    }
+
+    case "START_BUG_CHALLENGE": {
+      if (state.bugs <= 0) return state;
+      if (state.activeBugChallenge) return state;
+
+      return {
+        ...state,
+        activeBugChallenge: createBugChallenge(),
+      };
+    }
+
+    case "ANSWER_BUG_CHALLENGE": {
+      if (!state.activeBugChallenge) return state;
+
+      const correct = action.answer === state.activeBugChallenge.correctAnswer;
+
+      if (!correct) {
+        return {
+          ...state,
+          bugs: state.bugs + 1,
+          activeBugChallenge: null,
+        };
+      }
+
+      const stats = getEffectiveStats(state);
+
+      return {
+        ...state,
+        bugs: Math.max(0, state.bugs - 1),
+        linesOfCode: state.linesOfCode + state.locPerBugFixed,
+        totalLinesOfCode: state.totalLinesOfCode + state.locPerBugFixed,
+        reputation: state.reputation + stats.reputationPerBug,
+        totalBugsFixed: state.totalBugsFixed + 1,
+        activeBugChallenge: null,
       };
     }
 
