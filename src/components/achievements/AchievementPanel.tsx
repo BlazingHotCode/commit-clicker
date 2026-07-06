@@ -1,5 +1,7 @@
 import {
+  Button,
   Card,
+  CardActions,
   CardContent,
   Chip,
   Grid,
@@ -11,9 +13,13 @@ import type { GameState } from "../../game/state/types";
 
 type AchievementPanelProps = {
   state: GameState;
+  onClaimAchievement: (achievementId: string) => void;
 };
 
-export function AchievementPanel({ state }: AchievementPanelProps) {
+export function AchievementPanel({
+  state,
+  onClaimAchievement,
+}: AchievementPanelProps) {
   return (
     <Paper component="section" variant="outlined" sx={{ p: 2.5 }}>
       <Typography variant="h5" component="h2" sx={{ mb: 2, fontWeight: 700 }}>
@@ -54,6 +60,20 @@ export function AchievementPanel({ state }: AchievementPanelProps) {
                     <strong>Reward:</strong> {achievement.rewardLabel}
                   </Typography>
                 </CardContent>
+                <CardActions>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    disabled={!claimable}
+                    onClick={() => onClaimAchievement(achievement.id)}
+                  >
+                    {claimed
+                      ? "Claimed"
+                      : claimable
+                        ? "Claim Reward"
+                        : "Locked"}
+                  </Button>
+                </CardActions>
               </Card>
             </Grid>
           );

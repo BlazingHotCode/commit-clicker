@@ -189,7 +189,12 @@ function App() {
         <Box sx={{ display: { xs: "none", md: "grid" }, gap: 3 }}>
           <MilestonePanel state={state} />
 
-          <AchievementPanel state={state} />
+          <AchievementPanel
+            state={state}
+            onClaimAchievement={(achievementId) =>
+              dispatch({ type: "CLAIM_ACHIEVEMENT", achievementId })
+            }
+          />
 
           {DEBUG_TOOLS_ENABLED && (
             <DebugPanel state={state} dispatch={dispatch} />
@@ -229,7 +234,12 @@ function App() {
               </AccordionSummary>
 
               <AccordionDetails>
-                <AchievementPanel state={state} />
+                <AchievementPanel
+                  state={state}
+                  onClaimAchievement={(achievementId) =>
+                    dispatch({ type: "CLAIM_ACHIEVEMENT", achievementId })
+                  }
+                />
               </AccordionDetails>
             </Accordion>
 
